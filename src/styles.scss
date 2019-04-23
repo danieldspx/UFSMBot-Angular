@@ -1,0 +1,10 @@
+@import '~normalize.css/normalize.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import './app/shared/sass/variables';
+
+body{
+  font-family: $font-family-sans-serif;
+}

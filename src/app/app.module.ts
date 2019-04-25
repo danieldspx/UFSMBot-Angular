@@ -16,9 +16,9 @@ import { MaterialModule } from './core/material.module';
 import { AppRoutingModule } from './app-routing.module';
 //Components
 import { AppComponent } from './app.component';
-import { CadastroContainerComponent } from './modules/cadastro/cadastro-container/cadastro-container.component'
+import { HomeContainerComponent } from './modules/home/home-container/home-container.component';
 //Dialogs
-import { DialogCadastroClienteComponent } from './shared/components/dialog-cadastro-cliente/dialog-cadastro-cliente.component';
+import { DialogSchedulingComponent } from './modules/home/components/dialog-scheduling/dialog-scheduling.component';
 //Others
 import { environment } from '@src/environments/environment';
 
@@ -27,8 +27,8 @@ registerLocaleData(ptBr);
 @NgModule({
   declarations: [
     AppComponent,
-    CadastroContainerComponent,
-    DialogCadastroClienteComponent
+    HomeContainerComponent,
+    DialogSchedulingComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +42,7 @@ registerLocaleData(ptBr);
     AngularFirestoreModule,
   ],
   entryComponents: [
-    DialogCadastroClienteComponent
+    DialogSchedulingComponent
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pt'},

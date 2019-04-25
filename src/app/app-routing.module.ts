@@ -3,11 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppConfig } from './configs/app.config';
 
-import { CadastroContainerComponent } from './modules/cadastro/cadastro-container/cadastro-container.component';
+import { HomeContainerComponent } from './modules/home/home-container/home-container.component';
 
 const routes: Routes = [
-  { path: AppConfig.routes.cadastrar, component: CadastroContainerComponent},
-  { path: '', redirectTo: '/cadastrar', pathMatch: 'full'}
+  { path: AppConfig.routes.home, component: HomeContainerComponent},
+  { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
 @NgModule({

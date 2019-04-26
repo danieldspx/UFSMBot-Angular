@@ -35,5 +35,37 @@ div.container-background{
         height: 30px;
       }
     }
+
+    mat-card{
+      display: grid;
+      grid-template:
+      'restaurant meals'
+      'days days';
+      grid-gap: 20px;
+      .line-card{
+        &.meals-info{
+          grid-area: meals;
+        }
+        &.restaurant-info{
+          grid-area: restaurant;
+        }
+        &.days-info{
+          grid-area: days;
+        }
+        .title *{
+          display: inline-block;
+          vertical-align: middle;
+          font-weight: bold;
+          font-size: 18px;
+          color: $deepBlack;
+          margin-right: 10px;
+        }
+        .values{
+          font-weight: 600;
+          font-size: 15px;
+          color: $deepBlack;
+        }
+      }
+    }
   }
 }

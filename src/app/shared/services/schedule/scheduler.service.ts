@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, QuerySnapshot, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 
 import { AuthService } from '../auth/auth.service';
@@ -9,6 +9,7 @@ import { Refeicao } from '../../interfaces/refeicao';
 import { Restaurante } from '../../interfaces/restaurante';
 import { Dia } from '../../interfaces/dia';
 import { Routine } from '../../interfaces/routine';
+import { RoutineWrapper } from '@app/shared/interfaces/routine-wrapper';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,8 @@ export class SchedulerService {
     {id: 6, nome: "Sábado"},
   ];
 
+  private currentRoutines: RoutineWrapper[] = [];
+
   constructor(
     private db: AngularFirestore,
     private toastr: ToastrService,
@@ -56,6 +59,30 @@ export class SchedulerService {
       console.log("Error Msg: ", erro);
       return false;
     });
+  }
+
+  hasRoutines(): boolean{
+    return this.currentRoutines.length !== 0;
+  }
+
+  async getAllRoutines(): Promise<RoutineWrapper[] | boolean>{
+    return this.db.firestore.collection(`estudantes/${this.auth.currentUser}/rotinas`)
+    .get()
+    .then((snapshot: QuerySnapshot<Routine>) => {
+      this.currentRoutines = [];
+      snapshot.forEach((doc: QueryDocumentSnapshot<Routine>) => {
+        this.currentRoutines.push({
+          id: doc.id,
+          docRef: doc.ref,
+          data: doc.data()
+        });
+      });
+      return this.currentRoutines;
+    })
+    .catch(() => {
+      this.toastr.error("Erro ao conectar com o servidor.");
+      return false;
+    })
   }
 
 }

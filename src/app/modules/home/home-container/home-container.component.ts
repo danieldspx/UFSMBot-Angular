@@ -1,9 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { DialogSchedulingComponent } from '../components/dialog-scheduling/dialog-scheduling.component';
 import { SchedulerService } from '@app/shared/services/schedule/scheduler.service';
 import { RoutineWrapper } from '@app/shared/interfaces/routine-wrapper';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-home-container',
@@ -14,6 +15,7 @@ export class HomeContainerComponent implements OnInit {
 
   public hasRoutines: boolean = false;
   public allRoutines: RoutineWrapper[] = [];
+  public presentationRoutines: any[] = [];
 
   constructor(
     public dialog: MatDialog,
@@ -30,10 +32,13 @@ export class HomeContainerComponent implements OnInit {
     });
   }
 
-  openScheduleDialog(): void {
+  openScheduleDialog(routine: RoutineWrapper): void {
+    if(isUndefined(routine)){
+      routine = <RoutineWrapper>{};
+    }
     const dialogRef = this.dialog.open(DialogSchedulingComponent, {
       width: '70%',
-      data: {}
+      data: routine
     });
 
     dialogRef.afterClosed().subscribe(result => {

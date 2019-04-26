@@ -10,6 +10,7 @@ import { Dia } from '@app/shared/interfaces/dia';
 
 import { SchedulerService } from '@app/shared/services/schedule/scheduler.service';
 import { isUndefined } from 'util';
+import { RoutineWrapper } from '@app/shared/interfaces/routine-wrapper';
 
 @Component({
   selector: 'app-dialog-scheduling',
@@ -21,27 +22,68 @@ export class DialogSchedulingComponent implements OnInit {
   public tiposRefeicoes: Refeicao[];
   public restaurantes: Restaurante[];
   public diasSemana: Dia[];
+  public routine: Routine = <Routine>{};
+  public isUpdating: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<DialogSchedulingComponent>,
-    @Inject(MAT_DIALOG_DATA) public routine: Routine,
+    @Inject(MAT_DIALOG_DATA) private routineWrapper: RoutineWrapper,
     private schedulerService: SchedulerService,
     private toastr: ToastrService
   ) { }
 
   ngOnInit() {
-    this.tiposRefeicoes = [...this.schedulerService.tiposRefeicoes];//Destructuring to avoid change the variable in the service
-    this.restaurantes = [...this.schedulerService.restaurantes];
-    this.diasSemana = [...this.schedulerService.diasSemana];
+    this.isUpdating = false;
+    this.tiposRefeicoes = this.schedulerService.getTiposRefeicoes();//Destructuring to avoid change the variable in the service
+    this.restaurantes = this.schedulerService.getRestaurantes();
+    this.diasSemana = this.schedulerService.getDiasSemana();
+    if(!isUndefined(this.routineWrapper.docRef)){
+      this.isUpdating = true;
+      this.mergeWrapperWithRoutine();
+    } else {
+      this.clearSelects();
+    }
+  }
+
+  mergeWrapperWithRoutine(){
+    this.tiposRefeicoes.forEach((refeicao, index) => {
+      this.tiposRefeicoes[index].selected = false;
+      this.routineWrapper.data.tiposRefeicao.map((tipoRefeicaoID: number) => {
+        if(refeicao.id === tipoRefeicaoID){
+          this.tiposRefeicoes[index].selected = true;
+        }
+      });
+    });
+
+    this.diasSemana.forEach((dia, index) => {
+      this.diasSemana[index].selected = false;
+      this.routineWrapper.data.dias.map((diaID: number) => {
+        if(dia.id === diaID){
+          this.diasSemana[index].selected = true;
+        }
+      });
+    });
+
+    this.routine.restaurante = this.routineWrapper.data.restaurante;
+  }
+
+  clearSelects(){
+    this.tiposRefeicoes.forEach((refeicao, index) => {
+      this.tiposRefeicoes[index].selected = false;
+    });
+
+    this.diasSemana.forEach((dia, index) => {
+      this.diasSemana[index].selected = false;
+    });
   }
 
   cancelRoutine(){
+    this.isUpdating = false;
     this.dialogRef.close();
   }
 
   addRoutine(){
-    this.routine.dias = this.getArrayID(this.diasSemana);
-    this.routine.tiposRefeicao = this.getArrayID(this.tiposRefeicoes);
+    this.prepareRoutineData();
     if(this.isRoutineValid(this.routine)){
       this.schedulerService.addRoutine(this.routine).then((isSuccess: boolean) => {
         if(isSuccess){
@@ -49,17 +91,38 @@ export class DialogSchedulingComponent implements OnInit {
           this.cancelRoutine();
         }
       })
-    } else {
-      let msg;
-      if(this.isEmpty(this.routine.dias)){
-        msg = "Selecione pelo menos um dia.";
-      } else if (this.isEmpty(this.routine.tiposRefeicao)){
-        msg = "Selecione pelo menos uma refeição.";
-      } else {
-        msg = "Selecione um restaurante.";
-      }
-      this.toastr.error(msg);
     }
+  }
+
+  updateRoutine(){
+    if(this.isUpdating){
+      this.prepareRoutineData();
+      if(this.isRoutineValid(this.routine)){
+        this.routineWrapper.data = this.routine;
+        this.schedulerService.updateRoutine(this.routineWrapper).then((isSuccess: boolean) => {
+          if(isSuccess){
+            this.routine = <Routine>{};
+            this.cancelRoutine();
+          }
+        })
+      }
+    }
+  }
+
+  deleteRoutine(){
+    if(this.isUpdating){
+      this.schedulerService.deleteRoutine(this.routineWrapper).then((isSuccess: boolean) => {
+        if(isSuccess){
+          this.routine = <Routine>{};
+          this.cancelRoutine();
+        }
+      })
+    }
+  }
+
+  prepareRoutineData(){
+    this.routine.dias = this.getArrayID(this.diasSemana);
+    this.routine.tiposRefeicao = this.getArrayID(this.tiposRefeicoes);
   }
 
   getArrayID(item: any): any{
@@ -72,6 +135,18 @@ export class DialogSchedulingComponent implements OnInit {
   }
 
   isRoutineValid(routine: Routine){
-    return !this.isEmpty(routine.dias) && !this.isEmpty(routine.tiposRefeicao) && !isUndefined(routine.restaurante)
+    const isValid = !this.isEmpty(routine.dias) && !this.isEmpty(routine.tiposRefeicao) && !isUndefined(routine.restaurante);
+    if(!isValid){
+      let msg: string;
+      if(this.isEmpty(this.routine.dias)){
+        msg = "Selecione pelo menos um dia.";
+      } else if (this.isEmpty(this.routine.tiposRefeicao)){
+        msg = "Selecione pelo menos uma refeição.";
+      } else {
+        msg = "Selecione um restaurante.";
+      }
+      this.toastr.error(msg);
+    }
+    return isValid;
   }
 }

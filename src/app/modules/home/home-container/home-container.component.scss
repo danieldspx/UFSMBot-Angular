@@ -16,6 +16,7 @@ div.container-background{
   left: 50%;
   transform: translateX(-50%);
   padding: 30px;
+  margin-bottom: 100px;
   .addSchedule{
     background-color: #1dd1a1;
     color: white;
@@ -35,13 +36,21 @@ div.container-background{
         height: 30px;
       }
     }
-
     mat-card{
       display: grid;
       grid-template:
       'restaurant meals'
       'days days';
       grid-gap: 20px;
+      position: relative;
+      cursor: pointer;
+      border-left-color: #07b8decc;
+      border-left-width: 5px;
+      border-left-style: solid;
+      &:not(:first-child){
+        margin-top: 20px;
+      }
+
       .line-card{
         &.meals-info{
           grid-area: meals;

@@ -29,6 +29,9 @@ import { HomeContainerComponent } from './modules/home/home-container/home-conta
 import { DialogSchedulingComponent } from './modules/home/components/dialog-scheduling/dialog-scheduling.component';
 //Others
 import { environment } from '@src/environments/environment';
+import { WeekdayPipe } from './shared/pipes/weekday.pipe';
+import { RestaurantPipe } from './shared/pipes/restaurant.pipe';
+import { MealPipe } from './shared/pipes/meal.pipe';
 
 registerLocaleData(ptBr);
 
@@ -41,6 +44,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppComponent,
     HomeContainerComponent,
     DialogSchedulingComponent,
+    WeekdayPipe,
+    RestaurantPipe,
+    MealPipe,
   ],
   imports: [
     BrowserModule,

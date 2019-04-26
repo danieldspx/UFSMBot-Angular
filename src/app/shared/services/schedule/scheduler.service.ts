@@ -16,27 +16,27 @@ import { RoutineWrapper } from '@app/shared/interfaces/routine-wrapper';
 })
 export class SchedulerService {
 
-  public restaurantes: Restaurante[] = [
-    {id: 1, nome: "RU - Campus I"},
-    {id: 41, nome: "RU - Campus II"}
+  private restaurantes: Restaurante[] = [
+    {id: 1, nome: 'RU - Campus I'},
+    {id: 41, nome: 'RU - Campus II'}
   ];
 
-  public tiposRefeicoes: Refeicao[] = [
-    {id: 1, nome: "Café"},
-    {id: 2, nome: "Almoço"},
-    {id: 3, nome: "Jantar"},
-    {id: 4, nome: "Distribuição"},
-    {id: 5, nome: "Distribuição - Kit Desjejum"}
+  private tiposRefeicoes: Refeicao[] = [
+    {id: 1, nome: 'Café'},
+    {id: 2, nome: 'Almoço'},
+    {id: 3, nome: 'Jantar'},
+    {id: 4, nome: 'Distribuição'},
+    {id: 5, nome: 'Distribuição - Kit Desjejum'}
   ];
 
-  public diasSemana: Dia[] = [
-    {id: 0, nome: "Domingo"},
-    {id: 1, nome: "Segunda"},
-    {id: 2, nome: "Terça-feira"},
-    {id: 3, nome: "Quarta-feira"},
-    {id: 4, nome: "Quinta-feira"},
-    {id: 5, nome: "Sexta-feira"},
-    {id: 6, nome: "Sábado"},
+  private diasSemana: Dia[] = [
+    {id: 0, nome: 'Domingo', short: 'Dom'},
+    {id: 1, nome: 'Segunda', short: 'Seg'},
+    {id: 2, nome: 'Terça-feira', short: 'Ter'},
+    {id: 3, nome: 'Quarta-feira', short: 'Qua'},
+    {id: 4, nome: 'Quinta-feira', short: 'Qui'},
+    {id: 5, nome: 'Sexta-feira', short: 'Sex'},
+    {id: 6, nome: 'Sábado', short: 'Sáb'},
   ];
 
   private currentRoutines: RoutineWrapper[] = [];
@@ -50,19 +50,16 @@ export class SchedulerService {
   async addRoutine(routine: Routine): Promise<boolean>{
     return this.db.collection(`estudantes/${this.auth.currentUser}/rotinas`)
     .add(routine)
-    .then(() => {
-      this.toastr.success("Rotina adicionada com sucesso. Não precisa se preocupar em marcar refeições a partir de hoje 🍽️");
+    .then((ref) => {
+      this.currentRoutines.push(<RoutineWrapper>{id: ref.id, docRef: ref, data: routine});
+      this.toastr.success('Rotina adicionada com sucesso. Não precisa se preocupar em marcar refeições a partir de hoje 🍽️');
       return true;
     })
     .catch((erro) => {
-      this.toastr.error("Erro ao adicionar a rotina.");
-      console.log("Error Msg: ", erro);
+      this.toastr.error('Erro ao adicionar a rotina.');
+      console.log('Error Msg: ', erro);
       return false;
     });
-  }
-
-  hasRoutines(): boolean{
-    return this.currentRoutines.length !== 0;
   }
 
   async getAllRoutines(): Promise<RoutineWrapper[] | boolean>{
@@ -80,9 +77,50 @@ export class SchedulerService {
       return this.currentRoutines;
     })
     .catch(() => {
-      this.toastr.error("Erro ao conectar com o servidor.");
+      this.toastr.error('Erro ao conectar com o servidor.');
       return false;
     })
+  }
+
+  async updateRoutine(routine: RoutineWrapper): Promise<boolean>{
+    return this.db.doc(routine.docRef.path).set(routine.data)
+    .then(() => {
+      this.toastr.success('Rotina atualizada com sucesso.');
+      return true;
+    })
+    .catch(() => {
+      this.toastr.error('Erro ao atualizar rotina.');
+      return false;
+    });
+  }
+
+  async deleteRoutine(routineDelete: RoutineWrapper): Promise<boolean>{
+    return this.db.doc(routineDelete.docRef.path).delete()
+    .then(() => {
+      this.currentRoutines = this.currentRoutines.filter(routine => routine.id != routineDelete.id);
+      this.toastr.success('Rotina deletada com sucesso.');
+      return true;
+    })
+    .catch(() => {
+      this.toastr.error('Erro ao deletar rotina.');
+      return false;
+    })
+  }
+
+  hasRoutines(): boolean{
+    return this.currentRoutines.length !== 0;
+  }
+
+  getDiasSemana(): Dia[]{
+    return [...this.diasSemana];
+  }
+
+  getRestaurantes(): Restaurante[]{
+    return [...this.restaurantes];
+  }
+
+  getTiposRefeicoes(): Refeicao[]{
+    return [...this.tiposRefeicoes];
   }
 
 }

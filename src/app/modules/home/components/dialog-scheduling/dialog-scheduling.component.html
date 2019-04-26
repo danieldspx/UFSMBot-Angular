@@ -26,6 +26,20 @@
   </div>
 </div>
 <div mat-dialog-actions>
-  <button mat-button class="btn-red" (click)="cancelRoutine()">Cancelar</button>
-  <button mat-button class="btn-blue" (click)="addRoutine()" cdkFocusInitial>Salvar Rotina</button>
+  <button mat-button class="btn-red verticalAlign" (click)="cancelRoutine()">Cancelar</button>
+  <button mat-button class="btn-blue verticalAlign" (click)="addRoutine()" *ngIf="isUpdating == false; else updateMode" cdkFocusInitial>
+    <mat-icon svgIcon="content-save"></mat-icon>
+    <span>Salvar</span>
+  </button>
+  <ng-template #updateMode>
+    <button mat-button class="btn-red verticalAlign" (click)="deleteRoutine()">
+      <mat-icon svgIcon="delete"></mat-icon>
+      <span>Deletar</span>
+    </button>
+    <button mat-button class="btn-blue verticalAlign" (click)="updateRoutine()" cdkFocusInitial>
+      <mat-icon svgIcon="refresh"></mat-icon>
+      <span>Atualizar</span>
+    </button>
+  </ng-template>
+
 </div>

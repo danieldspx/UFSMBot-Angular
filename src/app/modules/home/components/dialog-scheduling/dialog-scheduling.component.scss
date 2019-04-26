@@ -10,6 +10,16 @@ h1.mat-dialog-title{
   }
 }
 
+.verticalAlign{
+  & *{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  & span{
+    margin-left: 10px;
+  }
+}
+
 div.mat-dialog-content{
   height: auto;
   position: relative;

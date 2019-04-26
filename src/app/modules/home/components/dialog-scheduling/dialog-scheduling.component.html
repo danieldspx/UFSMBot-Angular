@@ -1,9 +1,9 @@
-<h1 mat-dialog-title>Rotina</h1>
+<h1 mat-dialog-title><span>Rotina</span> <mat-icon svgIcon="calendar-clock"></mat-icon></h1>
 <div mat-dialog-content perfectScrollbar>
   <div class="routine-contanier" fxLayout="row wrap">
     <mat-form-field fxFlex="80%">
       <mat-label>Restaurante</mat-label>
-      <mat-select>
+      <mat-select [(ngModel)]="routine.restaurante">
         <mat-option *ngFor="let restaurante of restaurantes" [value]="restaurante.id">
           {{restaurante.nome}}
         </mat-option>

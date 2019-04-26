@@ -5,10 +5,17 @@
 @import url('https://fonts.googleapis.com/css?family=Pacifico');
 @import './app/shared/sass/variables';
 @import '~perfect-scrollbar/css/perfect-scrollbar.css';
+@import '~ngx-toastr/toastr.css';
 
 body{
   height: 100vh;
   width: 100vw;
   max-height: 100vh;
   font-family: $font-family-sans-serif;
+}
+.toast-error{
+  background-color: $red;
+}
+.toast-success{
+  background-color: $green;
 }

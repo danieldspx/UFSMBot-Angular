@@ -13,6 +13,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+//Toastr
+import { ToastrModule } from 'ngx-toastr';
 //Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -51,13 +53,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     FlexLayoutModule,
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      preventDuplicates: true,
+    })
   ],
   entryComponents: [
     DialogSchedulingComponent
   ],
   providers: [
-    // {provide: LOCALE_ID, useValue: 'pt'},
+    {provide: LOCALE_ID, useValue: 'pt'},
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG

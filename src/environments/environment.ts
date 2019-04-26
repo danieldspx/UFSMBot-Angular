@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyBIBPQvE_ImUqj9riZr8ulWgalNU6bm0bQ",
-    authDomain: "hackathon-7dbaf.firebaseapp.com",
-    databaseURL: "https://hackathon-7dbaf.firebaseio.com",
-    projectId: "hackathon-7dbaf",
-    storageBucket: "hackathon-7dbaf.appspot.com",
-    messagingSenderId: "85789422376"
+    apiKey: "AIzaSyCi0_QekiFVXLYTxARrr9phyjLA2xmicFg",
+    authDomain: "ufsmbot.firebaseapp.com",
+    databaseURL: "https://ufsmbot.firebaseio.com",
+    projectId: "ufsmbot",
+    storageBucket: "ufsmbot.appspot.com",
+    messagingSenderId: "100941804377"
   }
 };
 

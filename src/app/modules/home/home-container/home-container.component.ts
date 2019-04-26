@@ -15,6 +15,7 @@ export class HomeContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.openScheduleDialog();
   }
 
   openScheduleDialog(): void {

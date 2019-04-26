@@ -1,4 +1,31 @@
 <h1 mat-dialog-title>Rotina</h1>
-<div mat-dialog-content>
-  <p>Teste</p>
+<div mat-dialog-content perfectScrollbar>
+  <div class="routine-contanier" fxLayout="row wrap">
+    <mat-form-field fxFlex="80%">
+      <mat-label>Restaurante</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let restaurante of restaurantes" [value]="restaurante.id">
+          {{restaurante.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="grid-select" >
+    <div class="dias-container" fxLayout="column" fxLayoutGap="15px">
+      <span class="title-container">
+        <span>Dias</span> <mat-icon svgIcon="calendar-multiselect"></mat-icon>
+      </span>
+      <mat-checkbox [(ngModel)]="diaSemana.selected" *ngFor="let diaSemana of diasSemana">{{diaSemana.nome}}</mat-checkbox>
+    </div>
+    <div class="refeicoes-container" fxLayout="column" fxLayoutGap="15px">
+      <span class="title-container">
+        <span>Refeições</span> <mat-icon svgIcon="silverware-fork-knife"></mat-icon>
+      </span>
+      <mat-checkbox [(ngModel)]="tipoRefeicao.selected" *ngFor="let tipoRefeicao of tiposRefeicoes">{{tipoRefeicao.nome}}</mat-checkbox>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="btn-red" (click)="cancelRoutine()">Cancelar</button>
+  <button mat-button class="btn-blue" (click)="addRoutine()" cdkFocusInitial>Salvar Rotina</button>
 </div>

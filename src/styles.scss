@@ -4,7 +4,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Pacifico');
 @import './app/shared/sass/variables';
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
 
 body{
+  height: 100vh;
+  width: 100vw;
+  max-height: 100vh;
   font-family: $font-family-sans-serif;
 }

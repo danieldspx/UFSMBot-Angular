@@ -7,6 +7,12 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
+//FxLayout
+import { FlexLayoutModule } from '@angular/flex-layout';
+//PerfectScrollbar
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 //Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -24,6 +30,10 @@ import { environment } from '@src/environments/environment';
 
 registerLocaleData(ptBr);
 
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,12 +50,18 @@ registerLocaleData(ptBr);
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    FlexLayoutModule,
+    PerfectScrollbarModule
   ],
   entryComponents: [
     DialogSchedulingComponent
   ],
   providers: [
-    {provide: LOCALE_ID, useValue: 'pt'},
+    // {provide: LOCALE_ID, useValue: 'pt'},
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
   ],
   bootstrap: [AppComponent]
 })

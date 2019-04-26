@@ -1,0 +1,41 @@
+@import '../../../../shared/sass/_variables.scss';
+
+div.mat-dialog-content{
+  height: auto;
+  position: relative;
+  .routine-contanier{
+    margin-bottom: 20px;
+  }
+  .grid-select{
+    display: grid;
+    grid-template:  'dias refeicoes';
+  }
+  .refeicoes-container{
+    grid-area: refeicoes;
+  }
+  .dias-container{
+    grid-area: dias;
+  }
+  .title-container{
+    font-size: 18px;
+    font-weight: 700;
+    color: $deepBlack;
+    margin-bottom: 20px;
+    & *{
+      vertical-align: middle;
+      display: inline-block;
+    }
+  }
+}
+div.mat-dialog-actions{
+  .btn-red{
+    background-color: $red;
+    color: white;
+    font-weight: bold;
+  }
+  .btn-blue{
+    background-color: $blue;
+    color: white;
+    font-weight: bold;
+  }
+}

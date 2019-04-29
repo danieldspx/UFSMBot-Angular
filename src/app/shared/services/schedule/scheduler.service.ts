@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 
 import { AngularFirestore, QuerySnapshot, QueryDocumentSnapshot } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
@@ -40,6 +40,7 @@ export class SchedulerService {
   ];
 
   private currentRoutines: RoutineWrapper[] = [];
+  @Output() public routineNotifications: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
     private db: AngularFirestore,
@@ -47,12 +48,17 @@ export class SchedulerService {
     private auth: AuthService
   ) { }
 
+  getRoutinesUpdated(){
+    return [...this.currentRoutines];
+  }
+
   async addRoutine(routine: Routine): Promise<boolean>{
-    return this.db.collection(`estudantes/${this.auth.getUID()}/rotinas`)
+    return this.db.collection(`${this.auth.getUID()}/rotinas`)
     .add(routine)
     .then((ref) => {
       this.currentRoutines.push(<RoutineWrapper>{id: ref.id, docRef: ref, data: routine});
       this.toastr.success('Rotina adicionada com sucesso. Não precisa se preocupar em marcar refeições a partir de hoje 🍽️');
+      this.routineNotifications.emit(true);
       return true;
     })
     .catch((erro) => {
@@ -63,7 +69,7 @@ export class SchedulerService {
   }
 
   async getAllRoutines(): Promise<RoutineWrapper[] | boolean>{
-    return this.db.firestore.collection(`estudantes/${this.auth.getUID()}/rotinas`)
+    return this.db.firestore.collection(`${this.auth.getUID()}/rotinas`)
     .get()
     .then((snapshot: QuerySnapshot<Routine>) => {
       this.currentRoutines = [];
@@ -87,6 +93,7 @@ export class SchedulerService {
     return this.db.doc(routine.docRef.path).set(routine.data)
     .then(() => {
       this.toastr.success('Rotina atualizada com sucesso.');
+      this.routineNotifications.emit(true);
       return true;
     })
     .catch(() => {
@@ -100,6 +107,7 @@ export class SchedulerService {
     .then(() => {
       this.currentRoutines = this.currentRoutines.filter(routine => routine.id != routineDelete.id);
       this.toastr.success('Rotina deletada com sucesso.');
+      this.routineNotifications.emit(true);
       return true;
     })
     .catch(() => {

@@ -37,9 +37,15 @@ export class HomeContainerComponent implements OnInit {
         this.hasRoutines = this.allRoutines.length !== 0;
       }
     });
+    this.schedulerService.routineNotifications.subscribe(hasUpdate => {
+      if(hasUpdate){
+        this.allRoutines = this.schedulerService.getRoutinesUpdated();
+        this.hasRoutines = this.allRoutines.length !== 0;
+      }
+    })
   }
 
-  openScheduleDialog(routine: RoutineWrapper): void {
+  openScheduleDialog(routine?: RoutineWrapper): void {
     if(isUndefined(routine)){
       routine = <RoutineWrapper>{};
     }

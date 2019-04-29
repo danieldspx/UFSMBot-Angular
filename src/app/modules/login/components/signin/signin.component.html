@@ -1,8 +1,8 @@
 <mat-card id="signin-container">
   <span class="title">Entrar</span>
   <div class="wrap-inputs" fxLayout="column wrap" fxLayoutGap="20px">
-    <span class="helper">* Entre com a matrícula e senha do Portal do Aluno</span>
     <ng-container *ngIf="!isSigningIn; else loadingAnimation">
+      <span class="helper">* Entre com a matrícula e senha do Portal do Aluno</span>
       <mat-form-field>
         <input matInput placeholder="Matrícula" [(ngModel)]="login.matricula" autocomplete="off">
       </mat-form-field>

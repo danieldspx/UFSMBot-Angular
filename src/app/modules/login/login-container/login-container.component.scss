@@ -1,0 +1,19 @@
+#login-container{
+  background: url('../../../../assets/login/background.jpeg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  .transparent-blue{
+    background-color: rgba(12, 209, 232, 0.3);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 0;
+  }
+}

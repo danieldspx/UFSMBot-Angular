@@ -18,15 +18,23 @@ import { ToastrModule } from 'ngx-toastr';
 //Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+//Firebase Auth
+import { AngularFireAuth } from '@angular/fire/auth';
+//Device Detector
+ import { DeviceDetectorModule } from 'ngx-device-detector';
 //Material Angular
 import { MaterialModule } from './core/material.module';
 //Routing
 import { AppRoutingModule } from './app-routing.module';
 //Components
 import { AppComponent } from './app.component';
+import { LoginContainerComponent } from './modules/login/login-container/login-container.component';
+import { SigninComponent } from './modules/login/components/signin/signin.component';
 import { HomeContainerComponent } from './modules/home/home-container/home-container.component';
 //Dialogs
 import { DialogSchedulingComponent } from './modules/home/components/dialog-scheduling/dialog-scheduling.component';
+//Services
+import { AuthService } from './shared/services/auth/auth.service';
 //Others
 import { environment } from '@src/environments/environment';
 import { WeekdayPipe } from './shared/pipes/weekday.pipe';
@@ -42,6 +50,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   declarations: [
     AppComponent,
+    LoginContainerComponent,
+    SigninComponent,
     HomeContainerComponent,
     DialogSchedulingComponent,
     WeekdayPipe,
@@ -63,12 +73,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ToastrModule.forRoot({
       timeOut: 3000,
       preventDuplicates: true,
-    })
+    }),
+    DeviceDetectorModule.forRoot()
   ],
   entryComponents: [
     DialogSchedulingComponent
   ],
   providers: [
+    AuthService,
+    AngularFireAuth,
     {provide: LOCALE_ID, useValue: 'pt'},
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

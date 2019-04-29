@@ -21,6 +21,12 @@ div.container-background{
     background-color: #1dd1a1;
     color: white;
   }
+  .signOut{
+    float: right;
+    clear: both;
+    background-color: $red;
+    color: white;
+  }
   .container-routines{
     margin-top: 40px;
     .routine-alert{

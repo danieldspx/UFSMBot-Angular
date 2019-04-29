@@ -1,0 +1,13 @@
+<mat-card id="signin-container">
+  <span class="title">Entrar</span>
+  <div class="wrap-inputs" fxLayout="column wrap" fxLayoutGap="20px">
+    <mat-form-field>
+      <input matInput placeholder="E-mail" [(ngModel)]="login.email" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Senha" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="login.password">
+      <mat-icon matSuffix (click)="togglePassword()">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </mat-form-field>
+    <button matRipple (click)="loginAttempt()" class="btnEntrar"><span>Entrar</span></button>
+  </div>
+</mat-card>

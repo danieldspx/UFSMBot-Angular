@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
+import { DeviceDetectorService } from 'ngx-device-detector';
+
 import { DialogSchedulingComponent } from '../components/dialog-scheduling/dialog-scheduling.component';
 import { SchedulerService } from '@app/shared/services/schedule/scheduler.service';
 import { RoutineWrapper } from '@app/shared/interfaces/routine-wrapper';
@@ -19,7 +21,8 @@ export class HomeContainerComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private schedulerService: SchedulerService
+    private schedulerService: SchedulerService,
+    private deviceService: DeviceDetectorService
   ) { }
 
   ngOnInit() {
@@ -36,9 +39,11 @@ export class HomeContainerComponent implements OnInit {
     if(isUndefined(routine)){
       routine = <RoutineWrapper>{};
     }
+    let dialogClassWidth = this.deviceService.isMobile ? 'full-width-dialog' : '';
     const dialogRef = this.dialog.open(DialogSchedulingComponent, {
       width: '70%',
-      data: routine
+      data: routine,
+      panelClass: dialogClassWidth
     });
 
     dialogRef.afterClosed().subscribe(result => {

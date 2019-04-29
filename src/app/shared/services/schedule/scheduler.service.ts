@@ -26,7 +26,7 @@ export class SchedulerService {
     {id: 2, nome: 'Almoço'},
     {id: 3, nome: 'Jantar'},
     {id: 4, nome: 'Distribuição'},
-    {id: 5, nome: 'Distribuição - Kit Desjejum'}
+    {id: 5, nome: 'Kit Desjejum'}
   ];
 
   private diasSemana: Dia[] = [
@@ -48,7 +48,7 @@ export class SchedulerService {
   ) { }
 
   async addRoutine(routine: Routine): Promise<boolean>{
-    return this.db.collection(`estudantes/${this.auth.currentUser}/rotinas`)
+    return this.db.collection(`estudantes/${this.auth.getUID()}/rotinas`)
     .add(routine)
     .then((ref) => {
       this.currentRoutines.push(<RoutineWrapper>{id: ref.id, docRef: ref, data: routine});
@@ -63,7 +63,7 @@ export class SchedulerService {
   }
 
   async getAllRoutines(): Promise<RoutineWrapper[] | boolean>{
-    return this.db.firestore.collection(`estudantes/${this.auth.currentUser}/rotinas`)
+    return this.db.firestore.collection(`estudantes/${this.auth.getUID()}/rotinas`)
     .get()
     .then((snapshot: QuerySnapshot<Routine>) => {
       this.currentRoutines = [];
@@ -76,7 +76,8 @@ export class SchedulerService {
       });
       return this.currentRoutines;
     })
-    .catch(() => {
+    .catch((e) => {
+      console.log(e);
       this.toastr.error('Erro ao conectar com o servidor.');
       return false;
     })

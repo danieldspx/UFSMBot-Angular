@@ -4,6 +4,9 @@
       <button mat-raised-button class="addSchedule" (click)="openScheduleDialog()">
         <mat-icon svgIcon="calendar-clock"></mat-icon>
       </button>
+      <button mat-raised-button class="signOut" (click)="signOut()">
+        <mat-icon svgIcon="logout"></mat-icon>
+      </button>
       <div class="container-routines">
         <span class="routine-alert" *ngIf="!hasRoutines; else showRoutines"><span>Nenhuma rotina salva</span> <img class="icon" src="./assets/icons/sad.svg"></span>
         <ng-template #showRoutines>

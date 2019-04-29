@@ -19,3 +19,8 @@ body{
 .toast-success{
   background-color: $green;
 }
+
+.full-width-dialog {
+  max-width: 90vw !important;
+  width: 90% !important;
+}

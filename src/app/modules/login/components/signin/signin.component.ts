@@ -9,9 +9,10 @@ import { AuthService } from '@app/shared/services/auth/auth.service';
 })
 export class SigninComponent implements OnInit {
 
-  hidePassword: boolean = true;
-  login: any = {
-    email: '',
+  public hidePassword: boolean = true;
+  public isSigningIn: boolean = false;
+  public login: any = {
+    matricula: '',
     password: ''
   };
 
@@ -25,9 +26,18 @@ export class SigninComponent implements OnInit {
   }
 
   loginAttempt(){//TODO: Add Animation
-    this.auth.signIn(this.login.email, this.login.password);
-    this.login.email = '';//TODO: only if signIn was successful
-    this.login.password = '';
+    this.isSigningIn = true;
+    this.auth.signIn(this.login.matricula, this.login.password);
+    this.auth.isSigningIn.subscribe((status => {
+      this.isSigningIn = status;
+      if(status === true){
+        this.login.matricula = '';
+        this.login.password = '';
+      } else {
+        this.login.password = '';
+      }
+    }))
+
   }
 
 }

@@ -1,4 +1,4 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable, NgZone, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -13,15 +13,14 @@ import * as firebase from 'firebase';
 export class AuthService {
 
   private currentUser: firebase.User = null;
+  @Output() public isSigningIn = new EventEmitter();
 
   constructor(
     private router: Router,
     private fireAuth: AngularFireAuth,
     private toastr: ToastrService,
     private ngZone: NgZone
-  ) {
-    console.log(this.fireAuth.idTokenResult);
-  }
+  ) {}
 
   hasUserTrace(): Promise<boolean>{
     return new Promise((resolve) => {
@@ -43,7 +42,7 @@ export class AuthService {
     return this.currentUser  === null ? false : true;
   }
 
-  signIn(matricula: string, password: string): void{
+  signIn(matricula: string, password: string){
     this.fireAuth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
     const credentials = {matricula: matricula, password: password};
     const requestInit: RequestInit = {
@@ -53,28 +52,26 @@ export class AuthService {
     };
     fetch(AppConfig.apiURI+AppConfig.uri.login, requestInit)
     .then((response) => {
-      console.log(response);
       if(response.ok){
         return response.json()
       }
       throw new Error('failed');
     })
     .then((data) => {
-      console.log(data);
       return data.token
     })
     .then((token) => {
-      console.log(token);
       return this.fireAuth.auth.signInWithCustomToken(token)
     })
     .then((e) => {
-      console.log(e)
       this.currentUser = this.fireAuth.auth.currentUser;
       this.redirectToHome();
     })
     .catch(error => {
-      console.log(error);
       this.toastr.error('Matricula e/ou Senha incorreto(s)')
+    })
+    .finally(() => {
+      this.isSigningIn.emit(false);
     });
   }
 

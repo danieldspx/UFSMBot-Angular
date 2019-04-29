@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { isUndefined } from 'util';
 
 import { DeviceDetectorService } from 'ngx-device-detector';
+
+import { AuthService } from '@app/shared/services/auth/auth.service';
 
 import { DialogSchedulingComponent } from '../components/dialog-scheduling/dialog-scheduling.component';
 import { SchedulerService } from '@app/shared/services/schedule/scheduler.service';
 import { RoutineWrapper } from '@app/shared/interfaces/routine-wrapper';
-import { isUndefined } from 'util';
+
 
 @Component({
   selector: 'app-home-container',
@@ -22,7 +25,8 @@ export class HomeContainerComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private schedulerService: SchedulerService,
-    private deviceService: DeviceDetectorService
+    private deviceService: DeviceDetectorService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -49,6 +53,10 @@ export class HomeContainerComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  signOut(){
+    this.auth.signOut();
   }
 
 }

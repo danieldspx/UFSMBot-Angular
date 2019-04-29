@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "HackathonAngular": {
+    "UFSMBot-Angular": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/HackathonAngular",
+            "outputPath": "dist/UFSMBot-Angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "HackathonAngular:build"
+            "browserTarget": "UFSMBot-Angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "HackathonAngular:build:production"
+              "browserTarget": "UFSMBot-Angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "HackathonAngular:build"
+            "browserTarget": "UFSMBot-Angular:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "HackathonAngular-e2e": {
+    "UFSMBot-Angular-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -115,11 +115,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "HackathonAngular:serve"
+            "devServerTarget": "UFSMBot-Angular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "HackathonAngular:serve:production"
+              "devServerTarget": "UFSMBot-Angular:serve:production"
             }
           }
         },
@@ -135,5 +135,5 @@
       }
     }
   },
-  "defaultProject": "HackathonAngular"
+  "defaultProject": "UFSMBot-Angular"
 }

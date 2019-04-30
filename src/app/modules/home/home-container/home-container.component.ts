@@ -31,7 +31,6 @@ export class HomeContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.openWelcomeDialog();
     this.schedulerService.getAllRoutines()
     .then((routines: RoutineWrapper[] | boolean) => {
       if(routines !== false){

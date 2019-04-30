@@ -9,6 +9,7 @@ import { AuthService } from '@app/shared/services/auth/auth.service';
 import { DialogSchedulingComponent } from '../components/dialog-scheduling/dialog-scheduling.component';
 import { SchedulerService } from '@app/shared/services/schedule/scheduler.service';
 import { RoutineWrapper } from '@app/shared/interfaces/routine-wrapper';
+import { DialogWelcomeComponent } from '../components/dialog-welcome/dialog-welcome.component';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class HomeContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.openWelcomeDialog();
     this.schedulerService.getAllRoutines()
     .then((routines: RoutineWrapper[] | boolean) => {
       if(routines !== false){
@@ -41,6 +43,12 @@ export class HomeContainerComponent implements OnInit {
       if(hasUpdate){
         this.allRoutines = this.schedulerService.getRoutinesUpdated();
         this.hasRoutines = this.allRoutines.length !== 0;
+      }
+    });
+    this.auth.isFirstLogin()
+    .then(isFirstLogin  => {
+      if(isFirstLogin){
+        this.openWelcomeDialog();
       }
     })
   }
@@ -58,6 +66,12 @@ export class HomeContainerComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+    });
+  }
+
+  openWelcomeDialog(){
+    const dialogRef = this.dialog.open(DialogWelcomeComponent, {
+      width: '70%'
     });
   }
 

@@ -1,0 +1,38 @@
+@import '../../../../shared/sass/_variables.scss';
+
+div.mat-dialog-content{
+  height: auto;
+  position: relative;
+}
+
+div.mat-dialog-actions{
+  .btn-blue{
+    background-color: $blue;
+    color: white;
+    font-weight: bold;
+  }
+}
+
+div.list-items{
+  font-weight: bold;
+  font-size: 18px;
+  color: $deepBlack;
+  display: block;
+  // word-break: break-all;
+  & *{
+    vertical-align: middle;
+  }
+  &:not(:first-child){
+    margin-top: 20px;
+  }
+  mat-icon{
+    margin-right: 5px;
+    color: $green;
+  }
+}
+
+.welcome-intro{
+  font-weight: bold;
+  color: $deepBlack;
+  font-size: 20px;
+}

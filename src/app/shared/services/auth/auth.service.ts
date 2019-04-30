@@ -2,6 +2,7 @@ import { Injectable, NgZone, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { AppConfig } from '@app/configs/app.config';
 import { ToastrService } from 'ngx-toastr';
@@ -19,7 +20,8 @@ export class AuthService {
     private router: Router,
     private fireAuth: AngularFireAuth,
     private toastr: ToastrService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private db: AngularFirestore
   ) {}
 
   hasUserTrace(): Promise<boolean>{
@@ -63,7 +65,7 @@ export class AuthService {
     .then((token) => {
       return this.fireAuth.auth.signInWithCustomToken(token)
     })
-    .then((e) => {
+    .then(() => {
       this.currentUser = this.fireAuth.auth.currentUser;
       this.redirectToHome();
     })
@@ -72,6 +74,25 @@ export class AuthService {
     })
     .finally(() => {
       this.isSigningIn.emit(false);
+    });
+  }
+
+  isFirstLogin(): Promise<boolean>{
+    return this.db.firestore.doc(this.getUID())
+    .get()
+    .then(docSnapshot => {
+      const student = docSnapshot.data();
+      return student.isFirstLogin !== false;
+    })
+    .catch(() => {
+      this.toastr.error('Erro ao buscar dados do estudante')
+      return false;
+    })
+  }
+
+  setFirstLoginFalse(){
+    this.db.doc(this.getUID()).update({isFirstLogin: false}).catch(() => {
+      this.toastr.error('Erro ao salvar dados do estudante')
     });
   }
 

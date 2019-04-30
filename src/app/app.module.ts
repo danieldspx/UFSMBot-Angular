@@ -32,6 +32,7 @@ import { LoginContainerComponent } from './modules/login/login-container/login-c
 import { SigninComponent } from './modules/login/components/signin/signin.component';
 import { HomeContainerComponent } from './modules/home/home-container/home-container.component';
 //Dialogs
+import { DialogWelcomeComponent } from './modules/home/components/dialog-welcome/dialog-welcome.component';
 import { DialogSchedulingComponent } from './modules/home/components/dialog-scheduling/dialog-scheduling.component';
 //Services
 import { AuthService } from './shared/services/auth/auth.service';
@@ -57,6 +58,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     WeekdayPipe,
     RestaurantPipe,
     MealPipe,
+    DialogWelcomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +79,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DeviceDetectorModule.forRoot()
   ],
   entryComponents: [
-    DialogSchedulingComponent
+    DialogSchedulingComponent,
+    DialogWelcomeComponent
   ],
   providers: [
     AuthService,

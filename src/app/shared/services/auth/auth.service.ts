@@ -111,7 +111,7 @@ export class AuthService {
   }
 
   redirectToHome(): void{
-    this.redirectTo(AppConfig.routes.home);
+    this.redirectTo(AppConfig.routes.routine);
 
   }
 

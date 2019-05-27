@@ -1,1 +1,6 @@
-<router-outlet></router-outlet>
+<ng-template [ngIf]="!isLoginRoute" [ngIfElse]="showLogin">
+  <app-navigation></app-navigation>
+</ng-template>
+<ng-template #showLogin>
+  <router-outlet></router-outlet>
+</ng-template>

@@ -2,12 +2,12 @@
   <span class="title">Entrar</span>
   <div class="wrap-inputs" fxLayout="column wrap" fxLayoutGap="20px">
     <ng-container *ngIf="!isSigningIn; else loadingAnimation">
-      <span class="helper">* Entre com a matrícula e senha do Portal do Aluno</span>
+      <span class="helper">* Seu usuário e senha (criptografada) serão salvos no banco de dados para que seja possível o agendamento.</span>
       <mat-form-field>
-        <input matInput placeholder="Matrícula" [(ngModel)]="login.matricula" autocomplete="off">
+        <input matInput placeholder="Matrícula do Portal" [(ngModel)]="login.matricula" autocomplete="off">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Senha" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="login.password">
+        <input matInput placeholder="Senha do Portal" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="login.password">
         <mat-icon matSuffix (click)="togglePassword()">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
       </mat-form-field>
       <button matRipple (click)="loginAttempt()" class="btnEntrar"><span>Entrar</span></button>

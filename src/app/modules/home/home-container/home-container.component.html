@@ -1,40 +1,35 @@
 <div class="container-background">
-  <mat-card class="container-card">
-    <mat-card-content>
-      <button mat-raised-button class="addSchedule" (click)="openScheduleDialog()">
-        <mat-icon svgIcon="calendar-clock"></mat-icon>
-      </button>
-      <button mat-raised-button class="signOut" (click)="signOut()">
-        <mat-icon svgIcon="logout"></mat-icon>
-      </button>
-      <div class="container-routines">
-        <span class="routine-alert" *ngIf="!hasRoutines; else showRoutines"><span>Nenhuma rotina salva</span> <img class="icon" src="./assets/icons/sad.svg"></span>
-        <ng-template #showRoutines>
-          <mat-card class="mat-elevation-z3 card-routine" (click)="openScheduleDialog(routine)" *ngFor="let routine of allRoutines">
-            <div class="line-card restaurant-info">
-              <span class="title">
-                <mat-icon svgIcon="silverware"></mat-icon>
-                <span>Restaurante:</span>
-              </span>
-              <span class="values">{{routine.data.restaurante | restaurant}}</span>
-            </div>
-            <div class="line-card days-info">
-              <span class="title">
-                <mat-icon svgIcon="calendar-multiselect"></mat-icon>
-                <span>Dia(s):</span>
-              </span>
-              <span class="values">{{routine.data.dias | weekday}}</span>
-            </div>
-            <div class="line-card meals-info">
-              <span class="title">
-                <mat-icon svgIcon="food-fork-drink"></mat-icon>
-                <span>Refeições:</span>
-              </span>
-              <span class="values">{{routine.data.tiposRefeicao | meal}}</span>
-            </div>
-          </mat-card>
-        </ng-template>
-      </div>
-    </mat-card-content>
-  </mat-card>
+  <div class="container-card">
+    <button mat-raised-button class="addSchedule" (click)="openScheduleDialog()">
+      <mat-icon svgIcon="calendar-clock"></mat-icon>
+    </button>
+    <div class="container-routines">
+      <span class="routine-alert" *ngIf="!hasRoutines; else showRoutines"><span>Nenhuma rotina salva</span> <img class="icon" src="./assets/icons/sad.svg"></span>
+      <ng-template #showRoutines>
+        <mat-card class="mat-elevation-z3 card-routine" (click)="openScheduleDialog(routine)" *ngFor="let routine of allRoutines">
+          <div class="line-card restaurant-info">
+            <span class="title">
+              <mat-icon svgIcon="silverware"></mat-icon>
+              <span>Restaurante:</span>
+            </span>
+            <span class="values">{{routine.data.restaurante | restaurant}}</span>
+          </div>
+          <div class="line-card days-info">
+            <span class="title">
+              <mat-icon svgIcon="calendar-multiselect"></mat-icon>
+              <span>Dia(s):</span>
+            </span>
+            <span class="values">{{routine.data.dias | weekday}}</span>
+          </div>
+          <div class="line-card meals-info">
+            <span class="title">
+              <mat-icon svgIcon="food-fork-drink"></mat-icon>
+              <span>Refeições:</span>
+            </span>
+            <span class="values">{{routine.data.tiposRefeicao | meal}}</span>
+          </div>
+        </mat-card>
+      </ng-template>
+    </div>
+  </div>
 </div>

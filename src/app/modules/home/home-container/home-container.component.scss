@@ -1,18 +1,13 @@
 @import '../../../shared/sass/_variables.scss';
 
 div.container-background{
-  background: #00B4DB;
-  background: -webkit-linear-gradient(to right, #00B4DB, #3cdafc);
-  background: linear-gradient(to right, #00B4DB, #3cdafc);
   width: 100%;
-  min-height: 100vh;
 }
 
 .container-card{
   position: relative;
-  margin-top: 80px;
   display: inline-block;
-  width: 70%;
+  width: 100%;
   left: 50%;
   transform: translateX(-50%);
   padding: 30px;

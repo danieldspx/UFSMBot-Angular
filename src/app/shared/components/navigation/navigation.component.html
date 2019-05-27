@@ -1,0 +1,36 @@
+
+<mat-toolbar>
+  <span class="brand-name" *ngIf="!isMobile; else showMenuMobile">
+    UFSMBot <mat-icon svgIcon="robot"></mat-icon>
+  </span>
+  <ng-template #showMenuMobile>
+    <span class="brand-name" (click)="toggleSideNav()">
+      <mat-icon svgIcon="menu"></mat-icon>
+    </span>
+  </ng-template>
+  <ul id="toolbar-actions" class="right hide-on-med-and-down">
+    <li>Olá, <span class="nav-client-name">Daniel</span></li>
+    <li><span class="boldText logout-btn" (click)="signOut()"><mat-icon svgIcon="logout"></mat-icon> Sair</span></li>
+  </ul>
+</mat-toolbar>
+<span id="wrap-drawer"><!-- This span makes sure that the menu-button has the same top as the sidenav -->
+  <button *ngIf="!isMobile" mat-mini-fab class="menu-button mat-elevation-z1" matRippleDisabled="true" (click)="toggleSideNav()" [@slideMenuBtnOutside]="btnMenuOutsideListState" (@slideMenuBtnOutside.start)="toggleStateBtnMenuInside('start')">
+    <mat-icon svgIcon="menu"></mat-icon>
+  </button>
+  <mat-drawer-container class="nav-container" [class.closed]="!sideNavOpen">
+    <mat-drawer #sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="sideNavOpen" class="mat-elevation-z2" [@shrinkSideNav]="sideNavOpen ? 'wide' : 'narrow'">
+      <mat-list class="sidenav-list">
+        <mat-list-item class="sidenav-item" id="sidenav-btn-menu" [@fadeBtnMenuInside]="btnMenuInsideListState" (click)="toggleSideNav()" [ngStyle]="{opacity: opacityBtnMenuInsideList}" (@fadeBtnMenuInside.start)="toggleOpacityBtnMenuInside($event)" (@fadeBtnMenuInside.done)="toggleOpacityBtnMenuInside($event)">
+          <mat-icon matListIcon svgIcon="menu"></mat-icon>
+        </mat-list-item>
+        <mat-list-item class="sidenav-item" *ngFor="let module of modulesList" (click)="navigateOnMenu()" routerLink="{{module.route}}" routerLinkActive="active" matRipple>
+          <mat-icon matListIcon svgIcon="{{module.icon}}"></mat-icon>
+          <span [ngStyle]="{opacity: opacityTextListSidenav}" class="module-name">{{module.name}}</span>
+        </mat-list-item>
+      </mat-list>
+    </mat-drawer>
+    <mat-drawer-content [@slideDrawerContent]="sideNavOpen ? 'on' : 'off'">
+      <router-outlet></router-outlet><!-- Outlet for the content -->
+    </mat-drawer-content>
+  </mat-drawer-container>
+</span>

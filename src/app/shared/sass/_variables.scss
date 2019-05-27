@@ -1,3 +1,11 @@
+//Toolbar
+$toolbar-height: 64px;
+
+//Side Nav
+$sidenav-width: 230px; //If changed you must change configs/app.config.ts
+$sidenav-width-closed: 70px; //If changed you must change configs/app.config.ts
+$sidenav-color-text: rgba(0,0,0,0.54);
+
 $font-family-sans-serif: "Roboto", sans-serif;
 
 //Theme

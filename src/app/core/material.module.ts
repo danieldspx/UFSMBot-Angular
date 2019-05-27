@@ -11,6 +11,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatBadgeModule } from '@angular/material/badge';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { MatListModule } from '@angular/material/list';
     MatSelectModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    MatListModule
+    MatListModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatBadgeModule
   ]
 })
 export class MaterialModule { }

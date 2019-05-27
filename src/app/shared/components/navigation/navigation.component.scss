@@ -1,0 +1,160 @@
+@import "../../sass/variables";
+
+mat-toolbar{
+  height: $toolbar-height;
+  background-color: $secondary;
+  color: white;
+  position: relative;
+  .brand-name{
+    position: relative;
+    text-align: center;
+    font-size: 1.7em;
+    color: white;
+  }
+  ul#toolbar-actions{
+    position: absolute;
+    right: 10px;
+    margin: 0px;
+    padding: 0px;
+    margin-top: 5px;
+    font-size: 15px;
+    li , a{
+      display: inline-block;
+    }
+    li:not(:last-child){
+      margin-right: 30px;
+    }
+    .nav-client-name{
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    .mat-icon{
+      vertical-align: text-bottom;
+    }
+    #toolbar-icon-agenda{
+      width: 14px;
+      height: 14px;
+    }
+    .logout-btn{
+      cursor: pointer;
+    }
+  }
+}
+
+mat-drawer { /*Left NavMenu*/
+  width: $sidenav-width;
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Standard syntax */
+}
+
+mat-drawer-content{
+  padding: 40px 50px;
+  overflow: hidden auto;
+  background-color: #f5f6f5;
+  &:after{
+    content: "";
+    display: block;
+    height: 50px;
+    width: 100%;
+  }
+}
+
+#wrap-drawer{
+  height: 100%;
+  position: relative;
+
+  .menu-button{
+    position: absolute;
+    left: $sidenav-width;
+    top: 0px;
+    transform: translateX(-50%);
+    color: $sidenav-color-text;
+    z-index: 2;
+    background-color: white;
+  }
+}
+
+.nav-container{
+  height: calc(100% - #{$toolbar-height});
+  max-height: 100vh;
+  .sidenav-list{
+    padding-top: 0px;
+    position: relative;
+    .sidenav-item{
+      position: relative;
+      font-size: 20px;
+      color: $sidenav-color-text;
+      transition: all 0.3s;
+      cursor: pointer;
+      .mat-icon {
+        vertical-align: bottom;
+        font-size: 30px;
+      }
+      .module-name{
+        margin-left: 25px;
+      }
+      &#sidenav-btn-menu{
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        transition: opacity 0ms;//Just for the animation works properly
+      }
+      &:hover{
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+      &::before{
+        content: '';
+        transition: all 0.3s ease-in-out;
+        position: absolute;
+        width: 3px;
+        height: 0;
+        left: 0px;
+        background-color: $secondary;
+        opacity: 0;
+      }
+      &:hover::before{
+        opacity: 1;
+        height: 100%;
+      }
+    }
+    .active{
+      &::before{
+        content: '';
+        transition: all 0.5s ease-in-out;
+        position: absolute;
+        width: 3px;
+        height: 100%;
+        left: 0px;
+        background-color: $secondary;
+        opacity: 1;
+      }
+      background-color: rgba(0, 0, 0, 0.08);
+    }
+    & *{
+      outline: none;
+    }
+  }
+  &.closed {
+    mat-drawer {
+      width: $sidenav-width-closed;
+    }
+    mat-drawer-content{
+      margin-left: $sidenav-width-closed !important;
+    }
+  }
+}
+
+@media(max-width: 800px){
+  mat-drawer-content{
+    padding: 30px 10px;
+    overflow: hidden auto;
+    background-color: #f5f6f5;
+  }
+  .nav-container{
+    &.closed {
+      mat-drawer-content{
+        margin-left: 0px !important;
+      }
+    }
+  }
+}

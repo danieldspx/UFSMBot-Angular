@@ -59,3 +59,16 @@ div.mat-dialog-actions{
     font-weight: bold;
   }
 }
+
+
+@media(max-width: 800px){
+  div.mat-dialog-actions{
+    display: grid;
+    grid-template-columns: auto;
+    grid-row-gap: 10px;
+    grid-row: repeat(4, auto);
+    & .mat-button{
+      margin-left: 0px !important;
+    }
+  }
+}

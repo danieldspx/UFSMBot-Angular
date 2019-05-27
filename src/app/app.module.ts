@@ -28,6 +28,7 @@ import { MaterialModule } from './core/material.module';
 import { AppRoutingModule } from './app-routing.module';
 //Components
 import { AppComponent } from './app.component';
+import { NavigationComponent } from './shared/components/navigation/navigation.component';
 import { LoginContainerComponent } from './modules/login/login-container/login-container.component';
 import { SigninComponent } from './modules/login/components/signin/signin.component';
 import { HomeContainerComponent } from './modules/home/home-container/home-container.component';
@@ -41,6 +42,8 @@ import { environment } from '@src/environments/environment';
 import { WeekdayPipe } from './shared/pipes/weekday.pipe';
 import { RestaurantPipe } from './shared/pipes/restaurant.pipe';
 import { MealPipe } from './shared/pipes/meal.pipe';
+import { AppConfig } from './configs/app.config';
+import { AccountContainerComponent } from './modules/account/account-container/account-container.component';
 
 registerLocaleData(ptBr);
 
@@ -51,6 +54,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   declarations: [
     AppComponent,
+    NavigationComponent,
     LoginContainerComponent,
     SigninComponent,
     HomeContainerComponent,
@@ -59,6 +63,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RestaurantPipe,
     MealPipe,
     DialogWelcomeComponent,
+    AccountContainerComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +78,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FlexLayoutModule,
     PerfectScrollbarModule,
     ToastrModule.forRoot({
-      timeOut: 3000,
+      timeOut: AppConfig.snackBarDuration,
       preventDuplicates: true,
     }),
     DeviceDetectorModule.forRoot()

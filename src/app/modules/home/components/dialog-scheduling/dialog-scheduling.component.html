@@ -1,5 +1,5 @@
 <h1 mat-dialog-title><span>Rotina</span> <mat-icon svgIcon="calendar-clock"></mat-icon></h1>
-<div mat-dialog-content perfectScrollbar>
+<div mat-dialog-content perfectScrollbar style="overflow-y: auto;">
   <div class="routine-contanier" fxLayout="row wrap">
     <mat-form-field fxFlex="80%">
       <mat-label>Restaurante</mat-label>
@@ -24,21 +24,21 @@
       <mat-checkbox [(ngModel)]="tipoRefeicao.selected" *ngFor="let tipoRefeicao of tiposRefeicoes">{{tipoRefeicao.nome}}</mat-checkbox>
     </div>
   </div>
-</div>
-<div mat-dialog-actions>
-  <button mat-button class="btn-red verticalAlign" (click)="cancelRoutine()">Cancelar</button>
-  <button mat-button class="btn-blue verticalAlign" (click)="addRoutine()" *ngIf="isUpdating == false; else updateMode" cdkFocusInitial>
-    <mat-icon svgIcon="content-save"></mat-icon>
-    <span>Salvar</span>
-  </button>
-  <ng-template #updateMode>
-    <button mat-button class="btn-red verticalAlign" (click)="deleteRoutine()">
-      <mat-icon svgIcon="delete"></mat-icon>
-      <span>Deletar</span>
+  <div class="btns-actions">
+    <button mat-button class="btn-red verticalAlign" (click)="cancelRoutine()">Cancelar</button>
+    <button mat-button class="btn-blue verticalAlign" (click)="addRoutine()" *ngIf="isUpdating == false; else updateMode">
+      <mat-icon svgIcon="content-save"></mat-icon>
+      <span>Salvar</span>
     </button>
-    <button mat-button class="btn-blue verticalAlign" (click)="updateRoutine()" cdkFocusInitial>
-      <mat-icon svgIcon="refresh"></mat-icon>
-      <span>Atualizar</span>
-    </button>
-  </ng-template>
+    <ng-template #updateMode>
+      <button mat-button class="btn-red verticalAlign" (click)="deleteRoutine()">
+        <mat-icon svgIcon="delete"></mat-icon>
+        <span>Deletar</span>
+      </button>
+      <button mat-button class="btn-blue verticalAlign" (click)="updateRoutine()">
+        <mat-icon svgIcon="refresh"></mat-icon>
+        <span>Atualizar</span>
+      </button>
+    </ng-template>
+  </div>
 </div>

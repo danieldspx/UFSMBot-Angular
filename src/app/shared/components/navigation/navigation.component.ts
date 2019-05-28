@@ -117,6 +117,15 @@ export class NavigationComponent implements OnInit {
     this.opacityTextListSidenav = this.opacityTextListSidenav == 1 ? 0 : 1;
   }
 
+  getSlideDrawerAnimation(){
+    if(this.sideNavOpen && !this.isMobile){
+      return 'on';
+    } else if (!this.isMobile){
+      return 'off'
+    }
+    return '';
+  }
+
   signOut(){
     this.auth.signOut();
   }

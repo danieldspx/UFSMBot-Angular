@@ -47,7 +47,8 @@ div.mat-dialog-content{
     }
   }
 }
-div.mat-dialog-actions{
+div.btns-actions{
+  margin-top: 50px;
   .btn-red{
     background-color: $red;
     color: white;
@@ -62,7 +63,7 @@ div.mat-dialog-actions{
 
 
 @media(max-width: 800px){
-  div.mat-dialog-actions{
+  div.btns-actions{
     display: grid;
     grid-template-columns: auto;
     grid-row-gap: 10px;

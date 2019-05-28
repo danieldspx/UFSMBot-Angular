@@ -9,7 +9,7 @@
     </span>
   </ng-template>
   <ul id="toolbar-actions" class="right hide-on-med-and-down">
-    <li>Olá, <span class="nav-client-name">Daniel</span></li>
+    <li>Olá, <span class="nav-client-name">{{firstName}}</span></li>
     <li><span class="boldText logout-btn" (click)="signOut()"><mat-icon svgIcon="logout"></mat-icon> Sair</span></li>
   </ul>
 </mat-toolbar>
@@ -18,7 +18,7 @@
     <mat-icon svgIcon="menu"></mat-icon>
   </button>
   <mat-drawer-container class="nav-container" [class.closed]="!sideNavOpen">
-    <mat-drawer #sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="sideNavOpen" class="mat-elevation-z2" [@shrinkSideNav]="sideNavOpen ? 'wide' : 'narrow'">
+    <mat-drawer #sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="isMobile ? sideNavOpen : 'true'" class="mat-elevation-z2" [@shrinkSideNav]="sideNavOpen ? 'wide' : 'narrow'">
       <mat-list class="sidenav-list">
         <mat-list-item class="sidenav-item" id="sidenav-btn-menu" [@fadeBtnMenuInside]="btnMenuInsideListState" (click)="toggleSideNav()" [ngStyle]="{opacity: opacityBtnMenuInsideList}" (@fadeBtnMenuInside.start)="toggleOpacityBtnMenuInside($event)" (@fadeBtnMenuInside.done)="toggleOpacityBtnMenuInside($event)">
           <mat-icon matListIcon svgIcon="menu"></mat-icon>

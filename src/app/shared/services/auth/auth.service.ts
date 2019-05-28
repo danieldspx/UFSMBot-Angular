@@ -70,6 +70,7 @@ export class AuthService {
       this.redirectToHome();
     })
     .catch(error => {
+      console.log(error);
       this.toastr.error('Matricula e/ou Senha incorreto(s)')
     })
     .finally(() => {
@@ -117,6 +118,10 @@ export class AuthService {
 
   redirectToLogin(): void{
     this.redirectTo(AppConfig.routes.login);
+  }
+
+  deleteCurrentUser(): void{
+    this.currentUser.delete();
   }
 
   getUID(): string{

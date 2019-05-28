@@ -1,9 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { trigger, transition, state, style, animate } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { isUndefined } from 'util';
 
 import { AppConfig } from '@app/configs/app.config';
 import { AuthService } from '../../services/auth/auth.service';
+import { AccountService } from '@app/shared/services/account/account.service';
 
 @Component({
   selector: 'app-navigation',
@@ -58,9 +60,12 @@ export class NavigationComponent implements OnInit {
 
   isMobile: boolean;
 
+  firstName: string = 'Estudante'
+
   constructor(
     private auth: AuthService,
-    private media: MediaMatcher
+    private media: MediaMatcher,
+    private account: AccountService
   ){
     this.isMobile = media.matchMedia('(max-width: 800px)').matches;
     if(this.isMobile){
@@ -68,7 +73,13 @@ export class NavigationComponent implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.account.getInfo().then((accountInfo) => {
+      if(!isUndefined(accountInfo.nome)){
+        this.firstName = accountInfo.nome.split(' ')[0];
+      }
+    })
+  }
 
   toggleSideNav(){
     this.sideNavOpen = !this.sideNavOpen;

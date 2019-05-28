@@ -1,3 +1,30 @@
-<p>
-  account-container works!
-</p>
+<mat-card class="card-container">
+  <mat-card-content>
+    <div class="profile-container">
+      <div class="profile-img">
+        <img src="assets/account/breakfast.png" height="250px" alt="Foto de perfil">
+      </div>
+      <span class="profile-name">{{accountInfo.nome}}</span>
+      <span class="profile-course">
+        <mat-icon svgIcon="school"></mat-icon>
+        <span>{{accountInfo.curso}}</span>
+      </span>
+    </div>
+    <div class="info-list">
+      <span class="info-title">Informações</span>
+      <mat-form-field id="input-email">
+        <input matInput placeholder="E-mail" [(ngModel)]="accountInfo.email">
+        <mat-hint>E-mail usado para contato em casos urgentes.</mat-hint>
+      </mat-form-field>
+      <button mat-raised-button class="btn-action btn-save-all" (click)="saveEmail()">
+        <mat-icon>save</mat-icon>
+        <span>Salvar</span>
+      </button>
+      <span class="info-title">Ações</span>
+      <button mat-raised-button (click)="deleteEverything()" class="btn-action btn-delete-all">
+        <mat-icon>delete_forever</mat-icon>
+        <span>Deletar todos os seus dados do Banco de Dados</span>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

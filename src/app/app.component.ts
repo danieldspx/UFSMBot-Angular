@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { isUndefined } from 'util';
+
+// ga is the Analitycs function
+declare let ga: Function;
 
 @Component({
   selector: 'app-root',
@@ -19,6 +22,11 @@ export class AppComponent {
       if(!isUndefined(url.urlAfterRedirects) && url.urlAfterRedirects !== this.currentRoute){
         this.currentRoute = url.urlAfterRedirects;
         this.isLoginRoute = this.regexLogin.test(this.currentRoute);
+      }
+
+      if (url instanceof NavigationEnd) {
+        ga('set', 'page', url.urlAfterRedirects);
+        ga('send', 'pageview');
       }
     });
   }

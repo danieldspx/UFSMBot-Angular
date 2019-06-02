@@ -7,11 +7,6 @@
   left: 50%;
   top: 50px;
   transform: translateX(-50%);
-  .helper{
-    font-weight: bold;
-    font-size: 15px;
-    color: lighten($deepBlack, 30%);
-  }
   .title{
     position: relative;
     z-index: 1;
@@ -58,6 +53,17 @@
         z-index: 999;
         position: relative;
       }
+    }
+    .vertical-align *{
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .heart{
+      color: $red;
+      margin: 0 5px;
+    }
+    .bold-text{
+      font-weight: bold;
     }
   }
 }

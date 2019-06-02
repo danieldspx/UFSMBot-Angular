@@ -2,7 +2,6 @@
   <span class="title">Entrar</span>
   <div class="wrap-inputs" fxLayout="column wrap" fxLayoutGap="20px">
     <ng-container *ngIf="!isSigningIn; else loadingAnimation">
-      <span class="helper">* Seu usuário e senha (criptografada) serão salvos no banco de dados para que seja possível o agendamento.</span>
       <mat-form-field>
         <input matInput placeholder="Matrícula do Portal" [(ngModel)]="login.matricula" autocomplete="off">
       </mat-form-field>
@@ -11,6 +10,11 @@
         <mat-icon matSuffix (click)="togglePassword()">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
       </mat-form-field>
       <button matRipple (click)="loginAttempt()" class="btnEntrar"><span>Entrar</span></button>
+      <span class="vertical-align">
+        <span>Made with</span>
+        <mat-icon svgIcon="heart" class="heart"></mat-icon>
+        <span>by <span class="bold-text">@danieldspx</span></span>
+      </span>
     </ng-container>
     <ng-template #loadingAnimation>
       <mat-spinner></mat-spinner>

@@ -4,9 +4,12 @@
     UFSMBot <mat-icon svgIcon="robot"></mat-icon>
   </span>
   <ng-template #showMenuMobile>
-    <span class="brand-name" (click)="toggleSideNav()">
-      <mat-icon svgIcon="menu"></mat-icon>
-    </span>
+    <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu" [(ngModel)]="sideNavOpen">
+    <label for="openSidebarMenu" class="sidebarIconToggle">
+      <div class="spinner diagonal part-1"></div>
+      <div class="spinner horizontal"></div>
+      <div class="spinner diagonal part-2"></div>
+    </label>
   </ng-template>
   <ul id="toolbar-actions" class="right hide-on-med-and-down">
     <li>Olá, <span class="nav-client-name">{{firstName}}</span></li>

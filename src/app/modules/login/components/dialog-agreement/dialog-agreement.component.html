@@ -1,0 +1,42 @@
+<div mat-dialog-content perfectScrollbar>
+
+  <h1>Termo de Consentimento</h1>
+  <p>Para realizar os agendamentos através do UFSMBot e manter controle de quem utiliza
+    esta ferramenta precisamos de algumas informações. Essas informações são obtidas
+    através do portal do aluno e precisamos do seu consentimento para manipulá-las.
+    Caso você mude de ideia depois é possível deletar todas as suas
+    informações do banco de dados.</p>
+  <h3>Informações que são manipuladas: </h3>
+  <div class="list-items">
+    <mat-icon svgIcon="checkbox-marked-circle-outline"></mat-icon>
+    <span><span class="bold">Nome e Curso:</span> Utilizados para identificar cada usuário.</span>
+  </div>
+  <div class="list-items">
+    <mat-icon svgIcon="checkbox-marked-circle-outline"></mat-icon>
+    <span><span class="bold">Histórico de agendamentos e refeições:</span> Utilizados para aplicar punições aos que utilizam o UFSMBot e não comparecem aos agendamentos.</span>
+  </div>
+  <div class="list-items">
+    <mat-icon svgIcon="checkbox-marked-circle-outline"></mat-icon>
+    <span><span class="bold">Senha e Matrícula:</span> Utilizados para que os agendamentos sejam efetivamente realizados em seu nome.
+    A senha é criptografada quando salva no banco de dados. A orientação geral é que a senha do Portal do Aluno não senha a mesma de senhas de serviços como contas pessoais Google.</span>
+  </div>
+  <div class="list-items">
+    <mat-icon svgIcon="checkbox-marked-circle-outline"></mat-icon>
+    <span><span class="bold">E-mail:</span> Utilizados para comunicação.</span>
+  </div>
+
+  <p>O projeto é código livre. Isso quer dizer que qualquer um pode ver
+  qual o código por trás do UFSMBot que possibilita o agendamento e as demais funcionalidades.</p>
+  <p>
+    <span class="title-link">Back-End</span>
+    <a href="https://github.com/danieldspx/UFSMBot-NodeJS" class="link" target="_blank">https://github.com/danieldspx/UFSMBot-NodeJS</a>
+  </p>
+  <p>
+    <span class="title-link">Front-End</span>
+    <a href="https://github.com/danieldspx/UFSMBot-Angular" class="link" target="_blank">https://github.com/danieldspx/UFSMBot-Angular</a>
+  </p>
+</div>
+<div mat-dialog-actions class="btn-actions">
+  <button mat-raised-button class="btn-blue" (click)="acceptAgreement()">Concordo</button>
+  <button mat-raised-button class="btn-red" (click)="declineAgreement()">Não concordo</button>
+</div>

@@ -4,13 +4,27 @@ div.mat-dialog-content{
   height: auto;
   position: relative;
   will-change: transform, opacity;
+  .title-link{
+    font-weight: bold;
+  }
+  .link{
+    text-decoration: none;
+    margin-left: 10px;
+    font-weight: bold;
+    color: #00c6ff;
+  }
 }
 
 div.mat-dialog-actions{
-  .btn-blue{
-    background-color: $blue;
+  & button{
     color: white;
     font-weight: bold;
+  }
+  .btn-blue{
+    background-color: $blue !important;
+  }
+  .btn-red{
+    background-color: $red !important;
   }
 }
 
@@ -30,10 +44,4 @@ div.list-items{
     margin-right: 5px;
     color: $green;
   }
-}
-
-.welcome-intro{
-  font-weight: bold;
-  color: $deepBlack;
-  font-size: 20px;
 }

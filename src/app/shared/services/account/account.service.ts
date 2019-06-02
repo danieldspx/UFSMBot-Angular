@@ -44,15 +44,27 @@ export class AccountService {
   }
 
   deleteEverything(){
-    this.db.firestore.doc(this.auth.getUID()).delete()
+    this.db.firestore.collection(`${this.auth.getUID()}/rotinas`)
+    .get()
+    .then((querySnapshot) => {
+      this.toastr.info('Deletando rotinas...');
+      querySnapshot.forEach((docSnapshot) => {
+        docSnapshot.ref.delete();
+      })
+    })
     .then(() => {
-      this.toastr.info('Deletando dados do estudante...');
+      this.toastr.info('Deletando dados pessoais...');
+      return this.db.firestore.doc(this.auth.getUID()).delete()
+    })
+    .then(() => {
       this.toastr.info('Deletando conta e saindo...');
       this.auth.deleteCurrentUser();
-      this.auth.signOut();
     })
     .catch((error) => {
       this.toastr.error('Algo deu errado, tente novamente mais tarde.');
+    })
+    .finally(() => {
+      this.auth.signOut();
     });
   }
 

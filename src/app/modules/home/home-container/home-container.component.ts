@@ -22,6 +22,7 @@ export class HomeContainerComponent implements OnInit {
   public hasRoutines: boolean = false;
   public allRoutines: RoutineWrapper[] = [];
   public presentationRoutines: any[] = [];
+  public dialogClassWidth: string = '';
 
   constructor(
     public dialog: MatDialog,
@@ -31,6 +32,7 @@ export class HomeContainerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.dialogClassWidth = this.deviceService.isMobile ? 'full-width-dialog' : '';
     this.schedulerService.getAllRoutines()
     .then((routines: RoutineWrapper[] | boolean) => {
       if(routines !== false){
@@ -56,11 +58,10 @@ export class HomeContainerComponent implements OnInit {
     if(isUndefined(routine)){
       routine = <RoutineWrapper>{};
     }
-    let dialogClassWidth = this.deviceService.isMobile ? 'full-width-dialog' : '';
     const dialogRef = this.dialog.open(DialogSchedulingComponent, {
       width: '70%',
       data: routine,
-      panelClass: dialogClassWidth
+      panelClass: this.dialogClassWidth
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -70,7 +71,8 @@ export class HomeContainerComponent implements OnInit {
 
   openWelcomeDialog(){
     const dialogRef = this.dialog.open(DialogWelcomeComponent, {
-      width: '70%'
+      width: '70%',
+      panelClass: this.dialogClassWidth
     });
   }
 

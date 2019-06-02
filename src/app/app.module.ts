@@ -32,9 +32,11 @@ import { NavigationComponent } from './shared/components/navigation/navigation.c
 import { LoginContainerComponent } from './modules/login/login-container/login-container.component';
 import { SigninComponent } from './modules/login/components/signin/signin.component';
 import { HomeContainerComponent } from './modules/home/home-container/home-container.component';
+import { AccountContainerComponent } from './modules/account/account-container/account-container.component';
 //Dialogs
 import { DialogWelcomeComponent } from './modules/home/components/dialog-welcome/dialog-welcome.component';
 import { DialogSchedulingComponent } from './modules/home/components/dialog-scheduling/dialog-scheduling.component';
+import { DialogAgreementComponent } from './modules/login/components/dialog-agreement/dialog-agreement.component';
 //Services
 import { AuthService } from './shared/services/auth/auth.service';
 //Others
@@ -43,7 +45,6 @@ import { WeekdayPipe } from './shared/pipes/weekday.pipe';
 import { RestaurantPipe } from './shared/pipes/restaurant.pipe';
 import { MealPipe } from './shared/pipes/meal.pipe';
 import { AppConfig } from './configs/app.config';
-import { AccountContainerComponent } from './modules/account/account-container/account-container.component';
 
 registerLocaleData(ptBr);
 
@@ -64,6 +65,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MealPipe,
     DialogWelcomeComponent,
     AccountContainerComponent,
+    DialogAgreementComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,11 +83,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       timeOut: AppConfig.snackBarDuration,
       preventDuplicates: true,
     }),
-    DeviceDetectorModule.forRoot()
+    DeviceDetectorModule.forRoot(),
   ],
   entryComponents: [
     DialogSchedulingComponent,
-    DialogWelcomeComponent
+    DialogWelcomeComponent,
+    DialogAgreementComponent
   ],
   providers: [
     AuthService,

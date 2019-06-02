@@ -20,6 +20,10 @@ h1.mat-dialog-title{
   }
 }
 
+.mat-dialog-content{//This removes the laggy experience on Chrome mobile
+  will-change: transform, opacity;
+}
+
 div.mat-dialog-content{
   height: auto;
   position: relative;
@@ -49,6 +53,9 @@ div.mat-dialog-content{
 }
 div.btns-actions{
   margin-top: 50px;
+  & .mat-button:not(:first-child){
+    margin-left: 10px;
+  }
   .btn-red{
     background-color: $red;
     color: white;

@@ -44,9 +44,9 @@ export class AuthService {
     return this.currentUser  === null ? false : true;
   }
 
-  signIn(matricula: string, password: string){
+  signIn(matricula: string, password: string, hasAcceptedTerm: boolean){
     this.fireAuth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-    const credentials = {matricula: matricula, password: password};
+    const credentials = {matricula: matricula, password: password, hasAcceptedTerm: hasAcceptedTerm};
     const requestInit: RequestInit = {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -70,7 +70,6 @@ export class AuthService {
       this.redirectToHome();
     })
     .catch(error => {
-      console.log(error);
       this.toastr.error('Matricula e/ou Senha incorreto(s)')
     })
     .finally(() => {

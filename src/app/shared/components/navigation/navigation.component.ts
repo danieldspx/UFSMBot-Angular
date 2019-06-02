@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { trigger, transition, state, style, animate } from '@angular/animations';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { isUndefined } from 'util';
@@ -6,6 +6,7 @@ import { isUndefined } from 'util';
 import { AppConfig } from '@app/configs/app.config';
 import { AuthService } from '../../services/auth/auth.service';
 import { AccountService } from '@app/shared/services/account/account.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-navigation',
@@ -60,7 +61,10 @@ export class NavigationComponent implements OnInit {
 
   isMobile: boolean;
 
-  firstName: string = 'Estudante'
+  firstName: string = 'Estudante';
+
+  @ViewChild('sidenav')
+  public sidenav: MatSidenav;
 
   constructor(
     private auth: AuthService,
@@ -78,6 +82,9 @@ export class NavigationComponent implements OnInit {
       if(!isUndefined(accountInfo.nome)){
         this.firstName = accountInfo.nome.split(' ')[0];
       }
+    })
+    this.sidenav.closedStart.subscribe(() => {
+      this.sideNavOpen = false;
     })
   }
 

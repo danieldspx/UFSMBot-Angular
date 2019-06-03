@@ -13,7 +13,7 @@
     <div class="info-list">
       <span class="info-title">Informações</span>
       <mat-form-field id="input-email">
-        <input matInput placeholder="E-mail" [(ngModel)]="accountInfo.email">
+        <input type="email" matInput placeholder="E-mail" [(ngModel)]="accountInfo.email">
         <mat-hint>E-mail usado para contato em casos urgentes.</mat-hint>
       </mat-form-field>
       <button mat-raised-button class="btn-action btn-save-all" (click)="saveEmail()">

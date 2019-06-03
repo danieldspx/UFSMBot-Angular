@@ -13,6 +13,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+//Lottie Animations
+import { LottieAnimationViewModule } from 'ng-lottie';
 //Toastr
 import { ToastrModule } from 'ngx-toastr';
 //Firebase
@@ -37,6 +39,8 @@ import { AccountContainerComponent } from './modules/account/account-container/a
 import { DialogWelcomeComponent } from './modules/home/components/dialog-welcome/dialog-welcome.component';
 import { DialogSchedulingComponent } from './modules/home/components/dialog-scheduling/dialog-scheduling.component';
 import { DialogAgreementComponent } from './modules/login/components/dialog-agreement/dialog-agreement.component';
+import { DialogAccountDetailsComponent } from './modules/home/components/dialog-account-details/dialog-account-details.component';
+import { AnimationLoadingComponent } from './shared/components/animation-loading/animation-loading.component';
 //Services
 import { AuthService } from './shared/services/auth/auth.service';
 //Others
@@ -66,6 +70,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     DialogWelcomeComponent,
     AccountContainerComponent,
     DialogAgreementComponent,
+    DialogAccountDetailsComponent,
+    AnimationLoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,11 +90,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       preventDuplicates: true,
     }),
     DeviceDetectorModule.forRoot(),
+    LottieAnimationViewModule.forRoot()
   ],
   entryComponents: [
     DialogSchedulingComponent,
     DialogWelcomeComponent,
-    DialogAgreementComponent
+    DialogAgreementComponent,
+    DialogAccountDetailsComponent
   ],
   providers: [
     AuthService,

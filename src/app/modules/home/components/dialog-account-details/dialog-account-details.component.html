@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Detalhes da conta</h1>
+<div mat-dialog-content perfectScrollbar>
+  <mat-form-field style="width: 100%">
+    <input type="email" matInput placeholder="E-mail" [(ngModel)]="email">
+    <mat-hint>E-mail usado para contato em casos urgentes.</mat-hint>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="btn-blue" (click)="saveEmail()" mat-dialog-close cdkFocusInitial>Salvar</button>
+</div>

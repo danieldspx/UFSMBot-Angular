@@ -35,6 +35,12 @@ export class SigninComponent implements OnInit {
     this.hidePassword = !this.hidePassword;
   }
 
+  onKeydown(event) {
+    if (event.key === "Enter") {
+      this.loginAttempt();
+    }
+  }
+
   openDialogAgreement(){
     const dialogRef = this.dialog.open(DialogAgreementComponent, {
       width: '250px',

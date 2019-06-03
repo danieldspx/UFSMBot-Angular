@@ -6,18 +6,19 @@
         <input matInput placeholder="Matrícula do Portal" [(ngModel)]="login.matricula" autocomplete="off">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Senha do Portal" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="login.password">
+        <input matInput placeholder="Senha do Portal" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="login.password" (keydown)="onKeydown($event)">
         <mat-icon matSuffix (click)="togglePassword()">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
       </mat-form-field>
       <button matRipple (click)="loginAttempt()" class="btnEntrar"><span>Entrar</span></button>
-      <span class="vertical-align">
+      <span class="vertical-align made-with">
         <span>Made with</span>
         <mat-icon svgIcon="heart" class="heart"></mat-icon>
-        <span>by <span class="bold-text">@danieldspx</span></span>
+        <span>by</span>
+        <span class="bold-text" style="display: block">@danieldspx</span>
       </span>
     </ng-container>
     <ng-template #loadingAnimation>
-      <mat-spinner></mat-spinner>
+      <app-animation-loading></app-animation-loading>
     </ng-template>
   </div>
 </mat-card>

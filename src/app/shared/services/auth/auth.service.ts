@@ -6,7 +6,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { AppConfig } from '@app/configs/app.config';
 import { ToastrService } from 'ngx-toastr';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import { isUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +58,7 @@ export class AuthService {
       if(response.ok){
         return response.json()
       }
-      throw new Error('failed');
+      throw response.status;
     })
     .then((data) => {
       return data.token
@@ -70,11 +71,21 @@ export class AuthService {
       this.redirectToHome();
     })
     .catch(error => {
-      this.toastr.error('Matricula e/ou Senha incorreto(s)')
+      if(error == 403){
+        this.toastr.error('Matricula e/ou Senha incorreto(s).')
+      } else if(error == 502){
+        this.toastr.error('Os servidores da UFSM estão indisponíveis.')
+      } else {
+        this.toastr.error('Oops, ocorreu um erro inesperado. Tente novamente mais tarde.')
+      }
     })
     .finally(() => {
       this.isSigningIn.emit(false);
     });
+  }
+
+  hasToLoginAgain(student){
+    return isUndefined(student.agreementAccepted) || student.agreementAccepted === false;
   }
 
   isFirstLogin(): Promise<boolean>{
@@ -82,6 +93,10 @@ export class AuthService {
     .get()
     .then(docSnapshot => {
       const student = docSnapshot.data();
+      if(this.hasToLoginAgain(student)){
+        this.signOut();
+        return false;
+      }
       return student.isFirstLogin !== false;
     })
     .catch(() => {
@@ -112,7 +127,6 @@ export class AuthService {
 
   redirectToHome(): void{
     this.redirectTo(AppConfig.routes.routine);
-
   }
 
   redirectToLogin(): void{

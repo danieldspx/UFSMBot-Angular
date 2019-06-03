@@ -1,0 +1,9 @@
+@import '../../../../shared/sass/_variables.scss';
+
+div.mat-dialog-actions{
+  .btn-blue{
+    background-color: $blue;
+    color: white;
+    font-weight: bold;
+  }
+}

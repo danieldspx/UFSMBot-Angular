@@ -43,6 +43,22 @@ export class AccountService {
     return this.accountInfo;
   }
 
+  async hasEmail(): Promise<boolean>{
+    await this.auth.hasUserTrace();//Make sure we have the user
+    return this.db.firestore.doc(this.auth.getUID())
+    .get()
+    .then((docSnapshot) => {
+      const data = docSnapshot.data();
+      if(!isUndefined(data.email) || data.agreementAccepted != true){
+        return true;
+      }
+      return false;
+    })
+    .catch(() => {
+      return false;
+    })
+  }
+
   deleteEverything(){
     this.db.firestore.collection(`${this.auth.getUID()}/rotinas`)
     .get()
@@ -69,16 +85,26 @@ export class AccountService {
   }
 
   saveEmail(email: string){
-    this.db.firestore.doc(this.auth.getUID())
-    .update({email: email})
-    .then(() => {
-      this.toastr.success('Atualizado com sucesso.')
-    })
-    .catch((error) => {
-      this.toastr.error('Erro ao atualizar. Verifique sua conexão.');
-    })
+    email = email.toLowerCase();
+    if(this.validateEmail(email)){
+      this.accountInfo.email = email;
+      this.db.firestore.doc(this.auth.getUID())
+      .update({email: email})
+      .then(() => {
+        this.toastr.success('Atualizado com sucesso.')
+      })
+      .catch((error) => {
+        this.toastr.error('Erro ao atualizar. Verifique sua conexão.');
+      })
+    } else {
+        this.toastr.error('Endereço de e-mail inválido.');
+    }
   }
 
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
 }
 
 export interface Account{

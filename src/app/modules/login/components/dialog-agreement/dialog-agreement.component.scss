@@ -1,9 +1,12 @@
 @import '../../../../shared/sass/_variables.scss';
 
+h1.mat-dialog-title{
+  font-weight: bold;
+  font-size: 30px;
+}
+
 div.mat-dialog-content{
   height: auto;
-  position: relative;
-  will-change: transform, opacity;
   .title-link{
     font-weight: bold;
   }
@@ -43,5 +46,11 @@ div.list-items{
   mat-icon{
     margin-right: 5px;
     color: $green;
+  }
+}
+
+@media(max-width: 800px){
+  div.mat-dialog-content{
+    will-change: transform, opacity;
   }
 }

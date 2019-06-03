@@ -5,11 +5,13 @@ import { isUndefined } from 'util';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { AuthService } from '@app/shared/services/auth/auth.service';
+import { AccountService } from '@app/shared/services/account/account.service';
 
 import { DialogSchedulingComponent } from '../components/dialog-scheduling/dialog-scheduling.component';
 import { SchedulerService } from '@app/shared/services/schedule/scheduler.service';
 import { RoutineWrapper } from '@app/shared/interfaces/routine-wrapper';
 import { DialogWelcomeComponent } from '../components/dialog-welcome/dialog-welcome.component';
+import { DialogAccountDetailsComponent } from '../components/dialog-account-details/dialog-account-details.component';
 
 
 @Component({
@@ -28,7 +30,8 @@ export class HomeContainerComponent implements OnInit {
     public dialog: MatDialog,
     private schedulerService: SchedulerService,
     private deviceService: DeviceDetectorService,
-    private auth: AuthService
+    private auth: AuthService,
+    private accountService: AccountService
   ) { }
 
   ngOnInit() {
@@ -52,6 +55,15 @@ export class HomeContainerComponent implements OnInit {
         this.openWelcomeDialog();
       }
     })
+    this.accountService.hasEmail()
+    .then((hasEmail) => {
+      if(!hasEmail){
+        this.dialog.open(DialogAccountDetailsComponent, {
+          width: '70%',
+          panelClass: this.dialogClassWidth
+        });
+      }
+    })
   }
 
   openScheduleDialog(routine?: RoutineWrapper): void {
@@ -61,18 +73,16 @@ export class HomeContainerComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogSchedulingComponent, {
       width: '70%',
       data: routine,
-      panelClass: this.dialogClassWidth
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      panelClass: this.dialogClassWidth,
+      closeOnNavigation: true
     });
   }
 
   openWelcomeDialog(){
-    const dialogRef = this.dialog.open(DialogWelcomeComponent, {
+    this.dialog.open(DialogWelcomeComponent, {
       width: '70%',
-      panelClass: this.dialogClassWidth
+      panelClass: this.dialogClassWidth,
+      closeOnNavigation: true
     });
   }
 

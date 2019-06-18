@@ -133,7 +133,6 @@ mat-drawer-content{
 #wrap-drawer{
   height: 100%;
   position: relative;
-  will-change: transform, opacity;
   .menu-button{
     position: absolute;
     left: $sidenav-width;
@@ -142,6 +141,9 @@ mat-drawer-content{
     color: $sidenav-color-text;
     z-index: 2;
     background-color: white;
+  }
+  mat-drawer{
+    will-change: transform, opacity;
   }
 }
 

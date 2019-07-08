@@ -4,31 +4,49 @@
       <mat-icon svgIcon="calendar-clock"></mat-icon>
     </button>
     <div class="container-routines">
-      <span class="routine-alert" *ngIf="!hasRoutines; else showRoutines"><span>Nenhuma rotina salva</span> <img class="icon" src="./assets/icons/sad.svg"></span>
-      <ng-template #showRoutines>
-        <mat-card class="mat-elevation-z3 card-routine" (click)="openScheduleDialog(routine)" *ngFor="let routine of allRoutines">
-          <div class="line-card restaurant-info">
-            <span class="title">
-              <mat-icon svgIcon="silverware"></mat-icon>
-              <span>Restaurante:</span>
-            </span>
-            <span class="values">{{routine.data.restaurante | restaurant}}</span>
-          </div>
-          <div class="line-card days-info">
-            <span class="title">
-              <mat-icon svgIcon="calendar-multiselect"></mat-icon>
-              <span>Dia(s):</span>
-            </span>
-            <span class="values">{{routine.data.dias | weekday}}</span>
-          </div>
-          <div class="line-card meals-info">
-            <span class="title">
-              <mat-icon svgIcon="food-fork-drink"></mat-icon>
-              <span>Refeições:</span>
-            </span>
-            <span class="values">{{routine.data.tiposRefeicao | meal}}</span>
-          </div>
-        </mat-card>
+      <mat-card class="mat-elevation-z3 card-ban" *ngIf="banStatus; else notBanned">
+        <div class="line-card">
+          <span class="ban-info">Você foi banido por usar o BOT e não comparecer nem disponibilizar os
+            agendamentos. Após o banimento você deverá recriar sua rotina.</span>
+        </div>
+        <div class="line-card">
+          <span class="title">
+            <mat-icon svgIcon="cancel"></mat-icon>
+            <span>Banimento até:</span>
+          </span>
+          <span class="values">{{ banUntil | date:'dd/MM/yyyy'}}</span>
+        </div>
+      </mat-card>
+      <ng-template #notBanned>
+        <span class="routine-alert" *ngIf="!hasRoutines; else showRoutines">
+          <span>Nenhuma rotina salva</span> <img class="icon" src="./assets/icons/sad.svg">
+        </span>
+        <ng-template #showRoutines>
+          <mat-card class="mat-elevation-z3 card-routine" (click)="openScheduleDialog(routine)"
+            *ngFor="let routine of allRoutines">
+            <div class="line-card restaurant-info">
+              <span class="title">
+                <mat-icon svgIcon="silverware"></mat-icon>
+                <span>Restaurante:</span>
+              </span>
+              <span class="values">{{routine.data.restaurante | restaurant}}</span>
+            </div>
+            <div class="line-card days-info">
+              <span class="title">
+                <mat-icon svgIcon="calendar-multiselect"></mat-icon>
+                <span>Dia(s):</span>
+              </span>
+              <span class="values">{{routine.data.dias | weekday}}</span>
+            </div>
+            <div class="line-card meals-info">
+              <span class="title">
+                <mat-icon svgIcon="food-fork-drink"></mat-icon>
+                <span>Refeições:</span>
+              </span>
+              <span class="values">{{routine.data.tiposRefeicao | meal}}</span>
+            </div>
+          </mat-card>
+        </ng-template>
       </ng-template>
     </div>
   </div>

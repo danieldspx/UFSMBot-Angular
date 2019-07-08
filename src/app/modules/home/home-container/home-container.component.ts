@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { isUndefined } from 'util';
+import { isUndefined, isNullOrUndefined } from 'util';
 
 import { DeviceDetectorService } from 'ngx-device-detector';
 
@@ -25,6 +25,8 @@ export class HomeContainerComponent implements OnInit {
   public allRoutines: RoutineWrapper[] = [];
   public presentationRoutines: any[] = [];
   public dialogClassWidth: string = '';
+  public banUntil: any = null;
+  public banStatus: boolean = false;
 
   constructor(
     public dialog: MatDialog,
@@ -63,7 +65,8 @@ export class HomeContainerComponent implements OnInit {
           panelClass: this.dialogClassWidth
         });
       }
-    })
+    });
+    this.checkBanned();
   }
 
   openScheduleDialog(routine?: RoutineWrapper): void {
@@ -88,6 +91,15 @@ export class HomeContainerComponent implements OnInit {
 
   signOut(){
     this.auth.signOut();
+  }
+
+  async checkBanned(){
+    const today = new Date();
+    let account = await this.accountService.getInfo();
+    if(!isNullOrUndefined(account.banUntil)){
+      this.banUntil = account.banUntil.toDate();
+      this.banStatus = this.banUntil.getTime() >= today.getTime();
+    }
   }
 
 }

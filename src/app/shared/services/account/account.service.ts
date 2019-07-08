@@ -27,6 +27,7 @@ export class AccountService {
       const nome = docSnapshot.data().nome;
       const email = docSnapshot.data().email;
       const curso = docSnapshot.data().curso;
+      this.accountInfo.banUntil = docSnapshot.data().banUntil;
       this.accountInfo.curso = isUndefined(curso) ? 'Curso' : curso;
       this.accountInfo.email = isUndefined(email) ? 'estudante@contato.com' : email;
       this.accountInfo.nome = isUndefined(nome) ? 'Estudante' : nome;
@@ -110,5 +111,6 @@ export class AccountService {
 export interface Account{
   nome?: string,
   curso?: string,
-  email?: string
+  email?: string,
+  banUntil ?: any
 }

@@ -37,7 +37,7 @@ div.container-background{
         height: 30px;
       }
     }
-    mat-card{
+    mat-card.card-routine{
       display: grid;
       grid-template:
       'restaurant meals'
@@ -59,7 +59,7 @@ div.container-background{
         &.restaurant-info{
           grid-area: restaurant;
         }
-        &.days-info{
+        &.days-info, &.ban-info{
           grid-area: days;
         }
         .title *{
@@ -67,6 +67,42 @@ div.container-background{
           vertical-align: middle;
           font-weight: bold;
           font-size: 18px;
+          color: $deepBlack;
+          margin-right: 10px;
+        }
+        .values{
+          font-weight: 600;
+          font-size: 15px;
+          color: $deepBlack;
+        }
+      }
+    }
+    mat-card.card-ban{
+      display: block;
+      position: relative;
+      cursor: pointer;
+      border-left-color: $red;
+      border-left-width: 5px;
+      border-left-style: solid;
+      &:not(:first-child){
+        margin-top: 20px;
+      }
+
+      .line-card{
+        &:first-child{
+          margin-bottom: 20px;
+        }
+
+        .ban-info{
+          font-size: 16px;
+          font-weight: bold;
+        }
+
+        .title *{
+          display: inline-block;
+          vertical-align: middle;
+          font-weight: bold;
+          font-size: 16px;
           color: $deepBlack;
           margin-right: 10px;
         }

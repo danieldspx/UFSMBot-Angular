@@ -73,7 +73,7 @@ export class AuthService {
     .catch(error => {
       if(error == 403){
         this.toastr.error('Matricula e/ou Senha incorreto(s).')
-      } else if(error == 502){
+      } else if(error == 500){
         this.toastr.error('Os servidores da UFSM estão indisponíveis.')
       } else {
         this.toastr.error('Oops, ocorreu um erro inesperado. Tente novamente mais tarde.')

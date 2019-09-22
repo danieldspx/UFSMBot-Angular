@@ -12,6 +12,7 @@ import { SchedulerService } from '@app/shared/services/schedule/scheduler.servic
 import { RoutineWrapper } from '@app/shared/interfaces/routine-wrapper';
 import { DialogWelcomeComponent } from '../components/dialog-welcome/dialog-welcome.component';
 import { DialogAccountDetailsComponent } from '../components/dialog-account-details/dialog-account-details.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class HomeContainerComponent implements OnInit {
     private schedulerService: SchedulerService,
     private deviceService: DeviceDetectorService,
     private auth: AuthService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -70,6 +72,11 @@ export class HomeContainerComponent implements OnInit {
   }
 
   openScheduleDialog(routine?: RoutineWrapper): void {
+    if(this.banStatus){
+      this.toastr.warning('Você não pode criar a rotina se estiver banido.');
+      return;
+    }
+
     if(isUndefined(routine)){
       routine = <RoutineWrapper>{};
     }

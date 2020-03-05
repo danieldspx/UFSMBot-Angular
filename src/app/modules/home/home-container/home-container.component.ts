@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { isUndefined, isNullOrUndefined } from 'util';
-
-import { DeviceDetectorService } from 'ngx-device-detector';
-
-import { AuthService } from '@app/shared/services/auth/auth.service';
-import { AccountService } from '@app/shared/services/account/account.service';
-
-import { DialogSchedulingComponent } from '../components/dialog-scheduling/dialog-scheduling.component';
-import { SchedulerService } from '@app/shared/services/schedule/scheduler.service';
 import { RoutineWrapper } from '@app/shared/interfaces/routine-wrapper';
-import { DialogWelcomeComponent } from '../components/dialog-welcome/dialog-welcome.component';
-import { DialogAccountDetailsComponent } from '../components/dialog-account-details/dialog-account-details.component';
+import { AccountService } from '@app/shared/services/account/account.service';
+import { AuthService } from '@app/shared/services/auth/auth.service';
+import { SchedulerService } from '@app/shared/services/schedule/scheduler.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { ToastrService } from 'ngx-toastr';
+import { isNullOrUndefined, isUndefined } from 'util';
+import { DialogAccountDetailsComponent } from '../components/dialog-account-details/dialog-account-details.component';
+import { DialogSchedulingComponent } from '../components/dialog-scheduling/dialog-scheduling.component';
+import { DialogWelcomeComponent } from '../components/dialog-welcome/dialog-welcome.component';
+
+
+
 
 
 @Component({
@@ -107,6 +107,10 @@ export class HomeContainerComponent implements OnInit {
       this.banUntil = account.banUntil.toDate();
       this.banStatus = this.banUntil.getTime() >= today.getTime();
     }
+  }
+
+  scheduleNowForMe(){
+    
   }
 
 }

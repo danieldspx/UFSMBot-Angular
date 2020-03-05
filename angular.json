@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "UFSMBot-Angular": {
+    "ufsmbot-ng": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/UFSMBot-Angular",
+            "outputPath": "../../dist/client-ng",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "UFSMBot-Angular:build"
+            "browserTarget": "ufsmbot-ng:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "UFSMBot-Angular:build:production"
+              "browserTarget": "ufsmbot-ng:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "UFSMBot-Angular:build"
+            "browserTarget": "ufsmbot-ng:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "UFSMBot-Angular-e2e": {
+    "ufsmbot-ng-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -115,11 +115,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "UFSMBot-Angular:serve"
+            "devServerTarget": "ufsmbot-ng:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "UFSMBot-Angular:serve:production"
+              "devServerTarget": "ufsmbot-ng:serve:production"
             }
           }
         },
@@ -135,5 +135,5 @@
       }
     }
   },
-  "defaultProject": "UFSMBot-Angular"
+  "defaultProject": "ufsmbot-ng"
 }

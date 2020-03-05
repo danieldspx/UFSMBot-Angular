@@ -3,14 +3,16 @@ import { InjectionToken } from '@angular/core';
 export let APP_CONFIG = new InjectionToken('app.config');
 
 export const AppConfig: any = {
-  apiURI: 'https://ufsmbot.herokuapp.com',
+  apiURI: 'http://localhost:3000',
+  // apiURI: 'https://cornocomfome.herokuapp.com',
   routes: {
-    login: 'login',
-    routine: 'home',
-    account: 'account'
+    login: 'app/login',
+    routine: 'app/home',
+    account: 'app/account'
   },
   uri: {
    login: '/auth/login',
+   schedule: '/schedule'
  },
  snackBarDuration: 3000,
   sideNav: {

@@ -1,8 +1,8 @@
-# UFSMBot-Angular
+# ufsmbot-ng
 
 Este projeto foi criado com propósitos educacionais.
 
-[![](https://img.shields.io/badge/app-online-brightgreen.svg)](https://ufsmbot.herokuapp.com) [![](https://img.shields.io/badge/app-front--end-brightgreen.svg)](https://github.com/danieldspx/UFSMBot-Angular) [![](https://img.shields.io/badge/app-back--end-brightgreen.svg)](https://github.com/danieldspx/UFSMBot-NodeJS) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/danieldspx/UFSMBot-Angular/issues) [![](http://inch-ci.org/github/danieldspx/UFSMBot-NodeJS.svg?branch=develop)](http://inch-ci.org/github/danieldspx/UFSMBot-Angular)
+[![](https://img.shields.io/badge/app-online-brightgreen.svg)](https://ufsmbot.herokuapp.com) [![](https://img.shields.io/badge/app-front--end-brightgreen.svg)](https://github.com/danieldspx/ufsmbot-ng) [![](https://img.shields.io/badge/app-back--end-brightgreen.svg)](https://github.com/danieldspx/UFSMBot-NodeJS) [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/danieldspx/ufsmbot-ng/issues) [![](http://inch-ci.org/github/danieldspx/UFSMBot-NodeJS.svg?branch=develop)](http://inch-ci.org/github/danieldspx/ufsmbot-ng)
 
 ## Instalação
 Para poder rodar este projeto localmente você vai precisar do:
@@ -39,7 +39,7 @@ Vai abrir algo assim:
 
 ![](https://imgur.com/yuJWZzD.png)Feito isto, abra o projeto acesse
 
-    UFSMBot-Angular/src/environments
+    ufsmbot-ng/src/environments
 
 Observe que temos 2 arquivos, o `environment.ts` e o `environment.prod.ts`, atualize ambos os arquivos com as informações que obtivemos no Firebase. Esssas informações são públicas, e ninguém pode fazer nada com o seu projeto com elas, a menos que as regras no seu Cloud Firestore não estejam vulneráveis ou não configuradas.
 

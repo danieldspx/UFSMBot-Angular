@@ -1,7 +1,10 @@
 <div class="container-background">
   <div class="container-card">
-    <button mat-raised-button class="addSchedule" (click)="openScheduleDialog()">
+    <button mat-raised-button class="addSchedule" (click)="openScheduleDialog()" matTooltip="Criar rotina">
       <mat-icon svgIcon="calendar-clock"></mat-icon>
+    </button>
+    <button mat-raised-button class="addSchedule" (click)="scheduleNowForMe()" matTooltip="Rodar agendamentos agora">
+      <mat-icon svgIcon="calendar-refresh"></mat-icon>
     </button>
     <div class="container-routines">
       <mat-card class="mat-elevation-z3 card-ban" *ngIf="banStatus; else notBanned">

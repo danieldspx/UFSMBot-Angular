@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { DeviceDetectorService } from 'ngx-device-detector';
-
 import { AuthService } from '@app/shared/services/auth/auth.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { DialogAgreementComponent } from '../dialog-agreement/dialog-agreement.component';
+
 
 @Component({
   selector: 'app-signin',

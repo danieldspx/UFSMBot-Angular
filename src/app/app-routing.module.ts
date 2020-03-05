@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { AppConfig } from './configs/app.config';
-
+import { AccountContainerComponent } from './modules/account/account-container/account-container.component';
+import { HomeContainerComponent } from './modules/home/home-container/home-container.component';
+import { LoginContainerComponent } from './modules/login/login-container/login-container.component';
 import { AuthGuard } from './shared/services/auth/auth.guard';
 
-import { LoginContainerComponent } from './modules/login/login-container/login-container.component';
-import { HomeContainerComponent } from './modules/home/home-container/home-container.component';
-import { AccountContainerComponent } from './modules/account/account-container/account-container.component';
+
+
 
 const routes: Routes = [
   { path: AppConfig.routes.login, component: LoginContainerComponent},
@@ -20,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

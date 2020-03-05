@@ -1,13 +1,13 @@
-import { Injectable, NgZone, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { EventEmitter, Injectable, NgZone, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { Router } from '@angular/router';
 import { AppConfig } from '@app/configs/app.config';
-import { ToastrService } from 'ngx-toastr';
 import * as firebase from 'firebase/app';
+import { ToastrService } from 'ngx-toastr';
 import { isUndefined } from 'util';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -138,6 +138,7 @@ export class AuthService {
   }
 
   getUID(): string{
+    this.currentUser.
     return this.currentUser.uid;
   }
 }

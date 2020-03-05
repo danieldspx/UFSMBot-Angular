@@ -1,15 +1,16 @@
-import { Injectable, Output, EventEmitter } from '@angular/core';
-
-import { AngularFirestore, QuerySnapshot, QueryDocumentSnapshot } from '@angular/fire/firestore';
+import { HttpClient } from '@angular/common/http';
+import { EventEmitter, Injectable, Output } from '@angular/core';
+import { AngularFirestore, QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/firestore';
+import { RoutineWrapper } from '@app/shared/interfaces/routine-wrapper';
 import { ToastrService } from 'ngx-toastr';
-
-import { AuthService } from '../auth/auth.service';
-
+import { Dia } from '../../interfaces/dia';
 import { Refeicao } from '../../interfaces/refeicao';
 import { Restaurante } from '../../interfaces/restaurante';
-import { Dia } from '../../interfaces/dia';
 import { Routine } from '../../interfaces/routine';
-import { RoutineWrapper } from '@app/shared/interfaces/routine-wrapper';
+import { AuthService } from '../auth/auth.service';
+
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,8 @@ export class SchedulerService {
   constructor(
     private db: AngularFirestore,
     private toastr: ToastrService,
-    private auth: AuthService
+    private auth: AuthService,
+    private http: HttpClient
   ) { }
 
   getRoutinesUpdated(){
@@ -130,6 +132,10 @@ export class SchedulerService {
 
   getTiposRefeicoes(): Refeicao[]{
     return [...this.tiposRefeicoes];
+  }
+
+  triggerScheduleForMe(){
+    // this.http.get(AppConfig.apiURI+AppConfig.uri.schedule+`/${}`);
   }
 
 }

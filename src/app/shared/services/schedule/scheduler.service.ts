@@ -1,8 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { AngularFirestore, QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/firestore';
+import { AppConfig } from '@app/configs/app.config';
 import { RoutineWrapper } from '@app/shared/interfaces/routine-wrapper';
 import { ToastrService } from 'ngx-toastr';
+import { throwError } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
+import { isUndefined } from 'util';
 import { Dia } from '../../interfaces/dia';
 import { Refeicao } from '../../interfaces/refeicao';
 import { Restaurante } from '../../interfaces/restaurante';
@@ -135,7 +139,14 @@ export class SchedulerService {
   }
 
   triggerScheduleForMe(){
-    // this.http.get(AppConfig.apiURI+AppConfig.uri.schedule+`/${}`);
+    return this.auth.getMatricula().pipe(
+      mergeMap((matricula) => {
+        if (isUndefined(matricula)) {
+          return throwError('Could not get matricula');
+        }
+        return this.http.get(AppConfig.apiURI + AppConfig.uri.schedule + `/${matricula}`)
+      })
+    );
   }
 
 }

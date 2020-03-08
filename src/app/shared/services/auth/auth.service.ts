@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { AppConfig } from '@app/configs/app.config';
 import * as firebase from 'firebase/app';
 import { ToastrService } from 'ngx-toastr';
+import { from, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { isUndefined } from 'util';
 
 
@@ -137,8 +139,11 @@ export class AuthService {
     this.currentUser.delete();
   }
 
+  getMatricula(): Observable<string>{
+    return from(this.currentUser.getIdTokenResult()).pipe(map(idToken => idToken.claims.matricula));
+  }
+
   getUID(): string{
-    this.currentUser.
     return this.currentUser.uid;
   }
 }

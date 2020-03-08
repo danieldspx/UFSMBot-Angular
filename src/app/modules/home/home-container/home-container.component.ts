@@ -110,7 +110,15 @@ export class HomeContainerComponent implements OnInit {
   }
 
   scheduleNowForMe(){
-    
+    this.schedulerService.triggerScheduleForMe().subscribe(
+      (response) => {
+        this.toastr.success('Refeições agendadas com sucesso.');
+      },
+      (err) => {
+        this.toastr.error('Não foi possível agendar, tente novamente mais tarde.');
+        console.log(err)
+      }
+    );
   }
 
 }

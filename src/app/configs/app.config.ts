@@ -12,7 +12,7 @@ export const AppConfig: any = {
   },
   uri: {
    login: '/auth/login',
-   schedule: '/schedule'
+   schedule: '/bot/schedule'
  },
  snackBarDuration: 3000,
   sideNav: {
